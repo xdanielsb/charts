@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+
+    function getRadius( r ) {
+      return r
+    }
+    function getColor( r ){
+      if(r <= 10) return "green"
+      if(r <= 20) return "blue"
+      if(r <= 30) return "red"
+      else return "black"
+    }
+
+    let iradios = [30, 20 , 10]
+
+    let ibody = d3.select("body")
+    let isvg = ibody.append("svg")
+                        .attr("width", 200)
+                        .attr("height", 200)
+
+    let icircles = isvg.selectAll("circle")
+                      .data(iradios)
+                      .enter()
+                      .append("circle")
+
+    let iattr = icircles
+                .attr("cx", 50)
+                .attr("cy", 50)
+                .attr("r", getRadius )
+                .style("fill", getColor )
+
+  </script>
+</body>
+</html>
