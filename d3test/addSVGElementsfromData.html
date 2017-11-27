@@ -27,6 +27,7 @@
     let isvg = ibody.append("svg")
                         .attr("width", 200)
                         .attr("height", 200)
+                        .style("border", "1px solid black");
 
     let icircles = isvg.selectAll("circle")
                       .data(iradios)

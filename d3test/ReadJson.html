@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <title>Document</title>
+</head>
+
+<style>
+
+.node {
+  cursor: pointer;
+}
+
+.node:hover {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.node--leaf {
+  fill: white;
+}
+
+.label {
+  font: 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-anchor: middle;
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+}
+
+.label,
+.node--root,
+.node--leaf {
+  pointer-events: none;
+}
+
+</style>
+
+<body>
+
+
+<svg width="960" height="960"></svg>
+<script>
+  var svg = d3.select("svg"),
+    margin = 20,
+    diameter = +svg.attr("width"),
+    g = svg.append("g").attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
+
+	var color = d3.scaleLinear()
+			.domain([-1, 5])
+			.range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
+			.interpolate(d3.interpolateHcl);
+
+	var pack = d3.pack()
+			.size([diameter - margin, diameter - margin])
+			.padding(2);
+
+	d3.json("flater.json", function(data){
+		children = data["children"]
+		for (let ch in children){
+			console.log(children[ch])
+		}
+	})	
+</script>
+</body>
+</html>
+
