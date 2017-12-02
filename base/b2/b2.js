@@ -19,7 +19,7 @@ let margin = {
 let elements = []
 
 function getRadius( r ) {
-  return (width * 15 / 1000)
+  return (width * 10 / 1000)
 }
 
 function getX( e, r){
@@ -39,7 +39,7 @@ function getColor(d,i){
 }
 
 //Read the csv file
-d3.csv("b2.csv", function(data) {
+d3.csv("b21.csv", function(data) {
   // Add elements
   for ( let e in data ){
     let info = data[e]

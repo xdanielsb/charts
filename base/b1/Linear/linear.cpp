@@ -37,7 +37,7 @@ void generateStairs(vic &houses){
 
 int main(){
 	#ifdef LOCAL
-		freopen("in.c", "r", stdin);
+		freopen("new.c", "r", stdin);
 		freopen("out.c", "w", stdout);
 	#endif
 	
@@ -50,7 +50,7 @@ int main(){
 	for( int i =0; i < numHouses; i++){
 		cin >> name >> consumption;
 		houses[i].name = name;
-		houses[i].c = consumption;
+		houses[i].c = consumption*10;
 	}
 	generateStairs(houses);
 	cout << "name,radius,y\n";
