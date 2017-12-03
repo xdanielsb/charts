@@ -4,11 +4,14 @@
  * @author Daniel Santos <dfsantosbu@unal.edu.co>
  * @version 0.1
  */
- 
-let height = 400
-let width = 1000
-let Maxradius = 15
-let len = 0
+
+
+let nameFile = "b1.csv"
+ /*
+   @Constants: Setup variables
+ */
+let height = 400, width = 1000
+let Maxradius = 15, len = 0
 let x0 = 50, y0 = 30;
 let maxValue = 1400
 let margin = {
@@ -43,7 +46,7 @@ function getColor(d,i){
 }
 
 //Read the csv file
-d3.csv("b1.csv", function(data) {
+d3.csv(nameFile, function(data) {
   // Add elements
   for ( let e in data ){
     let info = data[e]

@@ -1,17 +1,21 @@
 'use strict'
 /**
- * @file Base chart 
+ * @file Base chart
  * @author Daniel Santos <dfsantosbu@unal.edu.co>
  * @version 0.1
  */
 
-let height = 500
-let width = 500
-let Maxradius = 15
-let len = 0
-let x0 = 50, y0 = 30;
+
+let nameFile = "b2.csv"
+
+/*
+  @Constants: Setup variables
+*/
+let height = 500, width = 500
+let Maxradius = 15,  len = 0
+let x0 = 50, y0 = 30
 let maxValue = 1100
-let minX = width*100;
+let minX = width*100
 let margin = {
     top: 20,
     right: 40,
@@ -44,7 +48,7 @@ function getColor(d,i){
 }
 
 //Read the csv file
-d3.csv("b2.csv", function(data) {
+d3.csv(nameFile, function(data) {
   // Add elements
   for ( let e in data ){
     let info = data[e]

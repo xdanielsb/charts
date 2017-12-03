@@ -4,6 +4,12 @@
  * @author Daniel Santos <dfsantosbu@unal.edu.co>
  * @version 0.1
  */
+
+
+let nameFile = "b3.csv"
+ /*
+   @Constants: Setup variables
+ */
 let height = 450
 let width = 450
 let Maxradius = 15
@@ -31,7 +37,7 @@ function getColor2(d,i){
 }
 
 //Read the csv file
-d3.csv("b3.csv", function(data) {
+d3.csv(nameFile, function(data) {
   // Add elements
   for ( let e in data ){
     let info = data[e]
