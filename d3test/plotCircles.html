@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+
+<script>
+  /*
+    Constants
+  */
+  let maxRadio = -1
+  let width = 500
+  let height = 500
+  /*
+    Comparator function
+  */
+  function comparator ( a, b ){
+    if (a[0] > b[0])  return -1;
+    if (a[0] < b[0])  return 1;
+    return 0;
+  }
+
+  /*
+    Function to get the radio
+  */
+  function getRadius( r ) {
+    return r * 30 / maxRadio
+  }
+
+  /*
+    Function to get the apropiate color
+  */
+  function getColor( r ){
+    if(r <= 10) return "green"
+    if(r <= 20) return "blue"
+    if(r <= 30) return "red"
+    else return "yellow"
+  }
+
+  /*
+    Check if there is a collision
+  */
+  function isOk( x , y , r ,  xn , yn, rn){
+    let res =  Math.pow(x-xn, 2) + Math.pow(y-yn, 2)
+    if( res < ( r + rn )) return false
+    return true
+  }
+
+  function generateLocation(loc, x0, y0, r){
+
+  }
+
+  /*
+    Generate locations circles
+  */
+  function generateAllLocations( circles ){
+    if (!circles) return
+    locations = []
+    if( circles.length == 0 ) return;
+    locations.push( [circles[0], 0.0, 0.0] )
+    for ( let i = 1; i < circles.length; i++){
+      locations.forEach(function(loc){
+        //circle in the graph
+        r = loc[0]
+        x = loc[1]
+        y = loc[2]
+        rn = circles[i]
+        //start pos at right of the current loc
+        let np = generateLocation(loc,x+r+rn,y)
+        if( np ){ //find a location
+          locations.push([rn, np[0], np[1]])
+          break;
+        }
+
+      })
+    }
+  }
+
+  // Body d3js
+  let ibody = d3.select("body")
+  let isvg = ibody.append("svg")
+                  .attr("width", width)
+                  .attr("height", height)
+                  .style("border", "1px solid black");
+
+  //Util functions
+  const arrayColumn = (arr, n) => arr.map(x => x[n]);
+
+  //Read the csv file
+  d3.csv("data.csv", function(data) {
+    let  len = data.length
+    let elements = []
+
+    // Add elements
+    for ( let e in data ){
+      let info = data[e]
+      let name = info["House"]
+      let radio = parseInt(info["consumption"])
+      if(isNaN(radio)) continue
+      maxRadio = Math.max(radio)
+      elements.push([radio, name])
+    }
+
+    // Sort the elements
+    elements.sort(comparator)
+    console.log(arrayColumn(elements, 0))
+    iradios = arrayColumn(elements, 0)
+
+    //Plot the circles
+    let icircles = isvg.selectAll("circle")
+                      .data(iradios)
+                      .enter()
+                      .append("circle")
+
+    generateAllLocations(iradios)
+    let iattr = icircles
+                .attr("cx", 50)
+                .attr("cy", 50)
+                .attr("r", getRadius )
+                .style("fill", getColor )
+
+  })
+</script>
+</body>
+</html>

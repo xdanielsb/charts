@@ -25,7 +25,7 @@ let margin = {
 let elements = []
 
 function getRadius( r ) {
-  return (Maxradius/len) * 15 * (Maxradius/r)
+  return (Maxradius/len) * 20 * (Maxradius/r)
 }
 
 function getX( e, r){

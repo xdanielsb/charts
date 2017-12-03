@@ -5,7 +5,7 @@
  * @version 0.1
  */
 
-let nameFile = "../../data/b3_1.csv"
+let nameFile = "../../data/b3_2.csv"
  /*
    @Constants: Setup variables
  */
@@ -19,9 +19,7 @@ let margin = {
   bottom: 10,
   left:30
 };
-/*
-  Function to get the radio
-*/
+
 let elements = []
 
 var color = d3.schemeCategory20c
@@ -64,7 +62,7 @@ d3.csv(nameFile, function(data) {
   let isvg = ibody.append("svg")
                       .attr("width", width +margin.left + margin.right  )
                       .attr("height", height + margin.left + margin.right)
-                      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                      .attr("transform", "translate(" + (margin.left +350 )+ "," + margin.top + ")")
   //                    .style("border", "1px solid black")
 
   //Axis

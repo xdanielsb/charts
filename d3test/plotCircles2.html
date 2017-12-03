@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+
+<script>
+  /*
+    Function to get the radio
+  */
+  let elements = []
+
+  function getRadius( r ) {
+    return r
+  }
+
+  function getX( e, r){
+    return elements[r][1]
+  }
+
+  function getY( e, r){
+    return elements[r][2]
+  }
+
+  var color = d3.schemeCategory20c
+
+  function getColor(d,i){
+    return color[i%color.length]
+  }
+
+  //Read the csv file
+  d3.csv("data2.csv", function(data) {
+    let  len = data.length
+
+    // Add elements
+    for ( let e in data ){
+      let info = data[e]
+      r = parseInt(info["radio"])
+      x = parseInt(info["x"])
+      y = parseInt(info["y"])
+      if(r){
+        elements.push([r,x,y])
+      }
+    }
+
+    const arrayColumn = (arr, n) => arr.map(x => x[n]);
+
+    let iradios = arrayColumn(elements, 0)
+
+    let ibody = d3.select("body")
+    let isvg = ibody.append("svg")
+                        .attr("width", 700)
+                        .attr("height", 700)
+                        .style("border", "1px solid black");
+
+    let icircles = isvg.selectAll("circle")
+                      .data(iradios)
+                      .enter()
+                      .append("circle")
+
+    let iattr = icircles
+                .attr("cx", getX )
+                .attr("cy", getY )
+                .attr("r", getRadius )
+                .style("fill", getColor )
+
+
+  })//end d3
+</script>
+</body>
+</html>

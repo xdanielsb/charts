@@ -5,7 +5,7 @@
  * @version 0.1
  */
 
-let nameFile = "../../data/b2_1.csv"
+let nameFile = "../../data/b2_2.csv"
 
 /*
   @Constants: Setup variables
@@ -19,7 +19,7 @@ let margin = {
     top: 20,
     right: 40,
     bottom: 40,
-    left:40
+    left:300
   };
 /*
   Function to get the radio
@@ -31,7 +31,7 @@ function getRadius( r ) {
 }
 
 function getX( e, r){
-  let res = elements[r][2] + x0 - minX;
+  let res = elements[r][2] + x0 - (minX/1.5);
   return res
 }
 
