@@ -1,5 +1,10 @@
 'use strict'
-
+/**
+ * @file Base chart
+ * @author Daniel Santos <dfsantosbu@unal.edu.co>
+ * @version 0.1
+ */
+ 
 let height = 400
 let width = 1000
 let Maxradius = 15

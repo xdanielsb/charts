@@ -1,4 +1,9 @@
 'use strict'
+/**
+ * @file Base chart 
+ * @author Daniel Santos <dfsantosbu@unal.edu.co>
+ * @version 0.1
+ */
 
 let height = 500
 let width = 500
@@ -66,7 +71,7 @@ d3.csv("b2.csv", function(data) {
                       .attr("width", width +margin.left + margin.right  )
                       .attr("height", height + margin.left + margin.right)
                       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-                      .style("border", "1px solid black")
+    //                  .style("border", "1px solid black")
 
   //Axis
   var xscale = d3.scaleLinear()

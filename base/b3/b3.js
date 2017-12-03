@@ -1,5 +1,9 @@
 'use strict'
-
+/**
+ * @file Base chart
+ * @author Daniel Santos <dfsantosbu@unal.edu.co>
+ * @version 0.1
+ */
 let height = 450
 let width = 450
 let Maxradius = 15
@@ -7,11 +11,11 @@ let len = 0
 let x0 = 50, y0 = 30;
 let maxValue = 1100
 let margin = {
-    top: 30,
-    right: 10,
-    bottom: 10,
-    left:30
-  };
+  top: 30,
+  right: 10,
+  bottom: 10,
+  left:30
+};
 /*
   Function to get the radio
 */
@@ -58,7 +62,7 @@ d3.csv("b3.csv", function(data) {
                       .attr("width", width +margin.left + margin.right  )
                       .attr("height", height + margin.left + margin.right)
                       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-                      .style("border", "1px solid black")
+  //                    .style("border", "1px solid black")
 
   //Axis
   var xscale = d3.scaleLinear()
