@@ -5,8 +5,7 @@
  * @version 0.1
  */
 
-
-let nameFile = "b2.csv"
+let nameFile = "../../data/b2_1.csv"
 
 /*
   @Constants: Setup variables

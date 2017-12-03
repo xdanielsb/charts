@@ -5,15 +5,12 @@
  * @version 0.1
  */
 
-
-let nameFile = "b3.csv"
+let nameFile = "../../data/b3_1.csv"
  /*
    @Constants: Setup variables
  */
-let height = 450
-let width = 450
-let Maxradius = 15
-let len = 0
+let height = 450, width = 450
+let Maxradius = 15,  len = 0
 let x0 = 50, y0 = 30;
 let maxValue = 1100
 let margin = {
@@ -131,8 +128,8 @@ d3.csv(nameFile, function(data) {
     //return elements[e][1] + height/2
    return yscale(elements[e][1]);
   }
-  function getRadius(d){
-    return d
+  function getRadius( r ){
+    return (Maxradius/len) * 20 * (Maxradius/r)
   }
   let iattr = icircles
               .attr("cx", getX )

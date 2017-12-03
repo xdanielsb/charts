@@ -5,14 +5,13 @@
  * @version 0.1
  */
 
-
-let nameFile = "b1.csv"
+let nameFile = "../../data/b1_2.csv"
  /*
    @Constants: Setup variables
  */
 let height = 400, width = 1000
 let Maxradius = 15, len = 0
-let x0 = 50, y0 = 30;
+let x0 = 50, y0 = 30
 let maxValue = 1400
 let margin = {
     top: 20,

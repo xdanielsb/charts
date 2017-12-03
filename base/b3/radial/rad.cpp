@@ -61,7 +61,7 @@ void rotate(double &nx, double &ny, double a){
 void generateRadial(vic &houses, vi &baskets){
 	double posx = 0 , posy=0;
 	int n  = houses.size();
-	double angle = 30;
+	double angle = 360/houses.size();
 	double t = 0;
 	for ( int i = 0 ; i < n ; i++ ){
 		posy = houses[i].c, posx = 0;
@@ -81,7 +81,7 @@ void generateRadial(vic &houses, vi &baskets){
 
 int main(){
 	#ifdef LOCAL
-		freopen("in.c", "r", stdin);
+		freopen("new.c", "r", stdin);
 		freopen("out.c", "w", stdout);
 	#endif
 	
