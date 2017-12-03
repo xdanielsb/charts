@@ -24,4 +24,3 @@ House22 900
 House23 800
 House24 700
 House25 900
-

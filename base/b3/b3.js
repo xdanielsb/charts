@@ -1,7 +1,7 @@
 'use strict'
 
-let height = 700
-let width = 700
+let height = 450
+let width = 450
 let Maxradius = 15
 let len = 0
 let x0 = 50, y0 = 30;
@@ -43,8 +43,8 @@ d3.csv("b3.csv", function(data) {
 
   let circles = []
   //Create the circles to plot
-  for( let i = 1; i <=4; i++){
-    circles.push(300*i)
+  for( let i = 1; i <4; i++){
+    circles.push(400*i)
   }
   console.log(circles)
 
