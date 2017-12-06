@@ -26,37 +26,32 @@ let margin = {
 /*
   @Constants for legends
 */
-let legendRectSize = 18; // NEW
-let legendSpacing = 4;
+let legendRectSize = 18
+let legendSpacing = 4
 let color = d3.scaleOrdinal(d3.schemeCategory20b);
 let customColors = [
   "blue",
   "red"
 ]
-let dataset = [{ label: 'Your household'},
+let labelsLegends = [{ label: 'Your household'},
                {label: 'Other household'}];
 
-
-
+//Dataset =)
 let elements = []
 /*
-  Function to get the radio
+  Utalitary functions
 */
 function getRadius(r) {
   return (Maxradius / len) * 20 * (Maxradius / r)
 }
-
 function getX(e, r) {
   let res = (width / len) * (r + 1) + x0
   return res
 }
-
 function getY(e, r) {
   let res = (maxValue - elements[r][1]) / (maxValue / height) + y0
   return res
 }
-
-
 function getColor(d, i) {
   if (i==10) return customColors[0]
   return customColors[1]
@@ -76,6 +71,7 @@ d3.csv(nameFile, function (data) {
   }
   len = elements.length
 
+  // utilitary function
   const arrayColumn = (arr, n) => arr.map(x => x[n]);
 
   let iradios = arrayColumn(elements, 0)
@@ -87,7 +83,7 @@ d3.csv(nameFile, function (data) {
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.left + margin.right)
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-  //                .style("border", "1px solid black")
+    // .style("border", "1px solid black")
 
   //Axis
   let xscale = d3.scaleLinear()
@@ -124,7 +120,8 @@ d3.csv(nameFile, function (data) {
   isvg.append("text")
     .attr("text-anchor", "middle") // this makes it easy to centre the text as the transform is applied to the anchor
     .attr("transform", "translate(" + 15 + "," + (height / 2) + ")rotate(-90)") // text is drawn off the screen top left, move down and out and rotate
-    .text("kWh / Month");
+    .text("kWh / Month")
+    .attr("class", "tittle")
 
   //Add atributtes circles
   let iattr = icircles
@@ -133,34 +130,32 @@ d3.csv(nameFile, function (data) {
     .attr("r", getRadius)
     .style("fill", getColor)
 
-
-
-  let legend = isvg.selectAll('.legend') // NEW
-    .data(dataset) // NEW
-    .enter() // NEW
-    .append('g') // NEW
-    .attr('class', 'legend') // NEW
-    .attr('transform', function (d, i) { // NEW
-      let h = legendRectSize + legendSpacing; // NEW
-      let offset = h * color.domain().length / 2; // NEW
+  let legend = isvg.selectAll('.legend')
+    .data(labelsLegends)
+    .enter()
+    .append('g')
+    .attr('class', 'legend')
+    .attr('transform', function (d, i) {
+      let h = legendRectSize + legendSpacing;
+      let offset = h * color.domain().length / 2;
       let horz = i * 7 * h - offset + width / 2
       let vert = (height + y0 + 20)
-      return 'translate(' + horz + ',' + vert + ')'; // NEW
-    }); // NEW
+      return 'translate(' + horz + ',' + vert + ')';
+    });
 
-  legend.append('rect') // NEW
-    .attr('width', legendRectSize) // NEW
-    .attr('height', legendRectSize) // NEW
+  legend.append('rect')
+    .attr('width', legendRectSize)
+    .attr('height', legendRectSize)
     .style('fill', function (d, i) {
       return customColors[i];
-    }) // NEW
-    .style('stroke', color); // NEW
+    })
+    .style('stroke', "black");
 
-  legend.append('text') // NEW
-    .attr('x', legendRectSize + legendSpacing) // NEW
-    .attr('y', legendRectSize - legendSpacing) // NEW
+  legend.append('text')
+    .attr('x', legendRectSize + legendSpacing)
+    .attr('y', legendRectSize - legendSpacing)
     .text(function (d) {
       return d.label;
-    }); // NEW
+    });
 
 }) //end d3
