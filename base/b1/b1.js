@@ -5,7 +5,7 @@
  * @version 0.1
  */
 
-let nameFile = "../../data/b1_2.csv"
+let nameFile = "../../data/b1_1.csv"
  /*
    @Constants: Setup variables
  */
@@ -64,7 +64,8 @@ d3.csv(nameFile, function(data) {
   let iconsum = arrayColumn(elements, 2)
 
 
-  let ibody = d3.select("body")
+
+  let ibody = d3.select("#chart")
   let isvg = ibody.append("svg")
                       .attr("width", width +margin.left + margin.right  )
                       .attr("height", height + margin.left + margin.right)
@@ -83,12 +84,12 @@ d3.csv(nameFile, function(data) {
 
   var x_axis = d3.axisBottom()
                  .scale(xscale)
-                 .ticks(iradios.length +1)
+                 .ticks(0)
 
 
   var y_axis = d3.axisLeft()
                  .scale(yscale)
-                 //.ticks(12)
+                 .ticks(12)
 
   let icircles = isvg.selectAll("circle")
                     .data(iradios)
@@ -102,7 +103,9 @@ d3.csv(nameFile, function(data) {
 
   isvg.append("g")
           .attr("transform", "translate("+x0+", " +(height+y0) +")")
+          .style("stroke-dasharray", ("3, 3"))
           .call(x_axis)
+
 
 
   //  now add titles and labels to the axes

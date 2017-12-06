@@ -6,11 +6,31 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <title>Chart 1</title>
+  <style media="screen">
+  .line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 2px;
+  }
+
+  .axisRed line{
+    stroke: red;
+  }
+
+  .axisRed path{
+    stroke: red;
+  }
+
+  .axisRed text{
+    fill: red;
+  } 
+  </style>
 </head>
 <body>
   <center>
     <h3>Last Month's energy usage per household.</h3>
   </center>
+  <div id="chart"></div>
 
 <script src="b1.js"></script>
 </body>
