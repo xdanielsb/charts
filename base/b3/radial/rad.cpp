@@ -6,11 +6,11 @@
 */
 
 using namespace std;
-const int radius = 15;
+int radius ;
 const int maxValue = 1000;
 const int width = 1000;
-const int height = 500;
-const int delta = 3;
+const int height = 1000;
+const int delta = 0;
 const double PI = acos(-1);
 
 struct house{ 
@@ -61,10 +61,11 @@ void rotate(double &nx, double &ny, double a){
 void generateRadial(vic &houses, vi &baskets){
 	double posx = 0 , posy=0;
 	int n  = houses.size();
-	double angle = 360/houses.size();
+	double angle ;//= 360/houses.size();
 	double t = 0;
 	for ( int i = 0 ; i < n ; i++ ){
 		posy = houses[i].c, posx = 0;
+		angle = 360 / baskets[getBask(posy)].f++;
 		int bask = getBask(houses[i].c);
 		ii &b  = baskets[bask];
 		rotate(posx , posy, t);
@@ -88,6 +89,7 @@ int main(){
 	int numHouses;
 	cin >> numHouses;
 	vic houses(numHouses);
+	radius = int(26*15/numHouses);
 	
 	string name;
 	int consumption;
@@ -104,7 +106,6 @@ int main(){
 	for (house a : houses){
 		a.show();
 	}
-	
 	return 0;
 }
 
