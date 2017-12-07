@@ -12,7 +12,7 @@ let nameFile = "../../data/b2_1.csv"
   @Constants: Setup letiables
 */
 let height = 350
-let width = 350
+let width = height // restriction for being circles
 let Maxradius = 15
 let len = 0
 let lessX = 0;
