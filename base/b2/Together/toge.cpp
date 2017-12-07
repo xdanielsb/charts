@@ -6,11 +6,11 @@
 */
 
 using namespace std;
-const int radius = 15;
+int radius ;
 const int maxValue = 1000;
 const int width = 1000;
-const int height = 500;
-const int delta = 3;
+const int height = 1000;
+const int delta = 0;
 
 struct house{ 
 	int x,y;
@@ -85,14 +85,14 @@ void generateTogether(vic &houses, vi &baskets){
 
 int main(){
 	#ifdef LOCAL
-		freopen("in.c", "r", stdin);
+		freopen("new.c", "r", stdin);
 		freopen("out.c", "w", stdout);
 	#endif
 	
 	int numHouses;
 	cin >> numHouses;
 	vic houses(numHouses);
-	
+	radius = int(26*50/numHouses);
 	string name;
 	int consumption;
 	vi baskets(numHouses+1);
