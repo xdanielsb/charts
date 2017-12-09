@@ -96,7 +96,6 @@ d3.csv(nameFile, function (data) {
   const arrayColumn = (arr, n) => arr.map(x => x[n]);
 
   let iradios = arrayColumn(elements, 0)
-  let iconsum = arrayColumn(elements, 2)
 
   let ibody = d3.select("#chart")
   let isvg = ibody.append("svg")

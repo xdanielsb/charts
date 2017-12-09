@@ -2,7 +2,7 @@
 /**
  * @file Base chart
  * @author Daniel Santos <dfsantosbu@unal.edu.co>
- * @version 0.1
+ * @version 1
  */
 const  radius = 15
 /*

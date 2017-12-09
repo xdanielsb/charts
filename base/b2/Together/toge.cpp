@@ -61,10 +61,6 @@ void generateTogether(vic &houses, vi &baskets){
 		}else{
 			posx =  width / 2 - 2*radius*(b.s/2)  - delta*(b.s+1);
 		}
-		if(bask & 0x01 && false){
-			if( b.s & 0x01 ) posx += radius;
-			else posx -= radius;
-		}
 		while(collide(houses, posx, posy)){
 			cout << "collide\n";
 			if( b.s & 0x01 ){

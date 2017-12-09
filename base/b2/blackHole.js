@@ -8,7 +8,7 @@
 /*
  @Constants: Setup variable
 */
-let height = 350
+let height = 550
 let width = height // restriction for being circles
 let Maxradius = 15
 let len = 0
@@ -58,7 +58,7 @@ function getRadius(r) {
  return xscale(r)
 }
 function getX(e, r) {
- return xscale(elements[r]["x"]) -  minX
+ return xscale(elements[r]["x"]) + 135
 }
 function getY(e, r) {
  //  let res = (maxValue - elements[r][1] ) /(maxValue/height) + y0
@@ -85,7 +85,7 @@ function collide(circles, x, y){
   for(let i = 0; i<n ; i++){
     let c = circles[i]
     if( c["x"] == 0 && c["y"]==0 ) continue
-    if( Math.pow(c["x"]-x,2) + Math.pow(c["y"]-y,2) < Math.pow(2*50,2) ) return true
+    if( Math.pow(c["x"]-x,2) + Math.pow(c["y"]-y,2) < Math.pow(2*radius,2) ) return true
   }
   return false
 }
