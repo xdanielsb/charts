@@ -1,12 +1,12 @@
 #include <bits/stdc++.h>
 /*
- 	This code generate the input for the base chart number1.
+ 	This code generate the input for the base chart number 1.
 */
 
 using namespace std;
 const int radius = 15;
 
-struct house{ 
+struct house{
 	int x,y;
 	string name;
 	int c; // consumption;
@@ -40,11 +40,11 @@ int main(){
 		freopen("new.c", "r", stdin);
 		freopen("out.c", "w", stdout);
 	#endif
-	
+
 	int numHouses;
 	cin >> numHouses;
 	vic houses(numHouses);
-	
+
 	string name;
 	int consumption;
 	for( int i =0; i < numHouses; i++){
@@ -57,6 +57,6 @@ int main(){
 	for (house a : houses){
 		a.show();
 	}
-	
+
 	return 0;
 }

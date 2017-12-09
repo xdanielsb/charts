@@ -2,7 +2,7 @@
 #define f first
 #define s second
 /*
- 	This code generate the input for the base chart number2.
+ 	This code generate the input for the base chart number 2.
 */
 
 using namespace std;
@@ -12,7 +12,7 @@ const int width = 1000;
 const int height = 1000;
 const int delta = 0;
 
-struct house{ 
+struct house{
 	int x,y;
 	string name;
 	int c; // consumption;
@@ -39,11 +39,8 @@ int getBask(int n){
 }
 
 bool collide(vic &circles, int x, int y){
- 	for(house c: circles ){
+ 	for( house c: circles ){
  		if(c.x == 0 && c.y == 0 ) continue;
- //		cout << c.x << " "<< c.y ;
- //		cout <<" , " << x << " "<< y << endl;
- 		//cout << (pow(x - c.x, 2) + pow(y - c.y, 2)) << " " << pow(2*radius, 2) <<endl;
  		if( pow(x-c.x, 2) + pow(y-c.y, 2) <  pow(2*radius, 2)) return true;
 	}
 	return false;
@@ -67,8 +64,7 @@ void generateTogether(vic &houses, vi &baskets){
 		if(bask & 0x01 && false){
 			if( b.s & 0x01 ) posx += radius;
 			else posx -= radius;
-		} 
-		//cout << collide(houses, posx, posy) <<endl;
+		}
 		while(collide(houses, posx, posy)){
 			cout << "collide\n";
 			if( b.s & 0x01 ){
@@ -88,7 +84,7 @@ int main(){
 		freopen("new.c", "r", stdin);
 		freopen("out.c", "w", stdout);
 	#endif
-	
+
 	int numHouses;
 	cin >> numHouses;
 	vic houses(numHouses);
@@ -100,7 +96,6 @@ int main(){
 		cin >> name >> consumption;
 		houses[i].name = name;
 		houses[i].c = consumption;
-		
 		baskets[getBask(consumption)].f++;
 	}
 	sort(houses.begin(), houses.end());
@@ -109,7 +104,5 @@ int main(){
 	for (house a : houses){
 		a.show();
 	}
-	
 	return 0;
 }
-

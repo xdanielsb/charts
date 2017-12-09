@@ -2,7 +2,7 @@
 #define f first
 #define s second
 /*
- 	This code generate the input for the base chart number2.
+ 	This code generate the input for the base chart number 3.
 */
 
 using namespace std;
@@ -13,7 +13,7 @@ const int height = 1000;
 const int delta = 0;
 const double PI = acos(-1);
 
-struct house{ 
+struct house{
 	int x,y;
 	string name;
 	int c; // consumption;
@@ -48,15 +48,11 @@ bool collide(vic &circles, int x, int y){
 }
 
 void rotate(double &nx, double &ny, double a){
-	//cout << nx << " " << ny << ", ang = "<< a << endl;
 	double x = nx, y =ny;
 	double  t = a * PI / 180.0;
   nx = x * cos(t) - y * sin(t);
   ny = x * sin(t) + y * cos(t);
- // cout <<"\t"<< nx << " " << ny << endl;
 }
-
-
 
 void generateRadial(vic &houses, vi &baskets){
 	double posx = 0 , posy=0;
@@ -85,12 +81,12 @@ int main(){
 		freopen("new.c", "r", stdin);
 		freopen("out.c", "w", stdout);
 	#endif
-	
+
 	int numHouses;
 	cin >> numHouses;
 	vic houses(numHouses);
 	radius = int(26*15/numHouses);
-	
+
 	string name;
 	int consumption;
 	vi baskets(numHouses+1);
@@ -108,5 +104,3 @@ int main(){
 	}
 	return 0;
 }
-
-
