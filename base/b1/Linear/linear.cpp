@@ -50,7 +50,7 @@ int main(){
 	for( int i =0; i < numHouses; i++){
 		cin >> name >> consumption;
 		houses[i].name = name;
-		houses[i].c = consumption*10;
+		houses[i].c = consumption;
 	}
 	generateStairs(houses);
 	cout << "name,radius,y\n";
