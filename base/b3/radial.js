@@ -13,6 +13,7 @@ let width = height // restriction for being circles
 let Maxradius = 15
 let len = 0
 let x0 = 50
+let home = 1
 let y0 = 30
 let maxValue = 1100
 let minX = 0
@@ -69,7 +70,7 @@ function getRadius(r) {
   return rscale(r) *2
 }
 function getColor(d, i) {
- if (i == 10) return customColors[0]
+ if (i == home) return customColors[0]
  return customColors[1]
 }
 
@@ -242,9 +243,10 @@ class Radial {
   constructor(nameFile){
     this.nameFile = nameFile
   }
-  plot(nameDiv, flag=true){
+  plot(nameDiv, myhome,  flag=true){
     // utilitary function
     const arrayColumn = (arr, n) => arr.map(x => x[n])
+    home = myhome
 
     d3.csv(this.nameFile, function (data) {
       if(flag){

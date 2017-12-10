@@ -14,6 +14,7 @@ let Maxradius = 15
 let len = 0
 let x0 = 50
 let y0 = 30
+let home = 0
 let maxValue = 1400
 let margin = {
   top: 20,
@@ -53,7 +54,7 @@ function getY(e, r) {
   return res
 }
 function getColor(d, i) {
-  if (i==10) return customColors[0]
+  if (i==home) return customColors[0]
   return customColors[1]
 }
 /*
@@ -159,7 +160,8 @@ class Peak {
   constructor(nameFile){
     this.nameFile = nameFile
   }
-  plot(nameDiv, flag=true){
+  plot(nameDiv, myhome, flag=true){
+    home = myhome
     // utilitary function
     const arrayColumn = (arr, n) => arr.map(x => x[n])
 

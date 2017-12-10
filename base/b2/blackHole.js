@@ -14,6 +14,7 @@ let Maxradius = 15
 let len = 0
 let x0 = 50
 let y0 = 30
+let home = 0
 let maxValue = 1100
 let minX = 0
 let margin = {
@@ -65,7 +66,7 @@ function getY(e, r) {
  return yscale(elements[r]["y"]) + y0
 }
 function getColor(d, i) {
- if (i == 10) return customColors[0]
+ if (i == home) return customColors[0]
  return customColors[1]
 }
 
@@ -205,9 +206,10 @@ class BlackHole {
   constructor(nameFile){
     this.nameFile = nameFile
   }
-  plot(nameDiv, flag=true){
+  plot(nameDiv, myhome, flag=true){
     // utilitary function
     const arrayColumn = (arr, n) => arr.map(x => x[n])
+    home = myhome
 
     d3.csv(this.nameFile, function (data) {
       if(flag){
