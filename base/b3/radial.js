@@ -10,7 +10,7 @@
 */
 let height = 510
 let width = height // restriction for being circles
-let Maxradius = 100
+let Maxradius = 15
 let len = 0
 let x0 = 50
 let y0 = 30
@@ -123,15 +123,21 @@ function generate(dataset, baskets){
     let aux = rotate(posx, posy, t)
     posx = aux[0], posy = aux[1]
     t += angle
+    let times = 0
     while(collide(elements, posx, posy)){
+      times += 1
       console.log("wtf")
       t = parseInt(t)%360
       t += angle
+      if(times>=100){
+        break;
+        //needs to  improve it
+      }
       aux = rotate(posx,posy, t)
       posx = aux[0], posy = aux[1]
     }
     elements.push({"radius":radius, "x":posx, "y":posy, "name":dataset[i][0]})
-//    baskets.set(bask,[ count,  many+1])
+    baskets.set(bask,[ count+1,  many+1])
   }
   return elements
 }
@@ -269,7 +275,6 @@ class Radial {
             let y = parseInt(info["y"])
             let x = parseInt(info["x"])
             radius = value
-            minX = Math.min(minX, x)
             elements.push({"radius":value, "y":y,"x":x,  "name":name })
           }
         }
