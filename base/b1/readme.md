@@ -1,5 +1,44 @@
 # #index
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="author" content="Daniel Santos">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="peak.js"></script>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" />
+  <title>Chart 1</title>
+  <style media="screen">
+  .tittle{
+    font-family: 'Open Sans',serif;
+  }
+  .legend {
+    font-size: : 12px;
+    font-family: 'Open Sans',serif;
+  }
+  </style>
+</head>
+<body>
+  <center>
+    <h2 class="tittle">Peaks of circles.</h2>
+  </center>
+  <div id="chart"></div>
+
+  <h2># index.html </h2>
+
+  <h2>LICENSE</h2>
+  <script>
+    let peak = new Peak("../../data/data1.csv")
+    //add the plot in the div whose name is equal to chart
+    let myHouse = 15
+    peak.plot("chart", myHouse)
+  </script>
+</body>
+</html>
+
 ```html
 <head>
   <script src="https://d3js.org/d3.v4.min.js"></script>
