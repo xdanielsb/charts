@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="author" content="Daniel Santos">
   <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="radial.js"></script>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" />
   <title>Chart 3</title>
   <style media="screen">
@@ -23,6 +24,10 @@
     <h2 class="tittle">Last Month's energy usage per household.</h2>
   </center>
   <div id="chart"></div>
-<script src="b3.js"></script>
+  <script>
+    let ra = new Radial("../../data/b3_2.csv")
+    ra.plot("chart")
+  </script>
+  <!-- <script src="b3.js"></script> -->
 </body>
 </html>
