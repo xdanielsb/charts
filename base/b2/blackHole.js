@@ -8,7 +8,7 @@
 /*
  @Constants: Setup variable
 */
-let height = 550
+let height = 510
 let width = height // restriction for being circles
 let Maxradius = 15
 let len = 0
@@ -106,9 +106,9 @@ function generate(dataset, baskets){
     if( many == 0 ){
       posx = width/2
     }else if( many % 2 != 0  ){
-      posx =  width / 2  + 2*radius*((many+1)/2)  +delta*(many+1);
+      posx =  width / 2  + 2*radius*((many+1)/2)  +delta*(many+1)
     }else{
-      posx =  width / 2 - 2*radius*(many/2)  - delta*(many+1);
+      posx =  width / 2 - 2*radius*(many/2)  - delta*(many+1)
     }
     while(collide(elements, posx, posy)){
       console.log("mgd")
@@ -227,7 +227,7 @@ class BlackHole {
             }
           }
         }
-        radius = parseInt(26*50/dataset.length)
+        radius = parseInt(26*48/dataset.length)
         elements = generate(dataset, basket)
       }else{
         for (let e in data) {

@@ -87,16 +87,14 @@ d3.csv(nameFile, function (data) {
 
   let circles = []
   //Create the circles to plot
+  //the faded circles
   for (let i = 1; i < 4; i++) {
     circles.push(400 * i)
   }
-  console.log(circles)
 
   const arrayColumn = (arr, n) => arr.map(x => x[n]);
 
   let iradios = arrayColumn(elements, 0)
-  let iconsum = arrayColumn(elements, 2)
-
   let ibody = d3.select("#chart")
   let isvg = ibody.append("svg")
     .attr("width", width + margin.left + margin.right)
