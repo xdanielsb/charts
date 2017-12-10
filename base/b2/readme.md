@@ -10,10 +10,10 @@
   <h2 class="tittle">Peaks of circles.</h2>
   <div id="chart"></div>
   <script>
-    let peak = new Peak("../../data/data1.csv")
-    let idDiv = "chart"
+    let bh = new BlackHole("../../data/data1.csv")
     let myHouse = 15
-    peak.plot(idDiv, myHouse)
+    let idDiv = "chart"
+    bh.plot(idDiv, myHouse)
   </script>
 </body>
 </html>
