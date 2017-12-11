@@ -1,4 +1,6 @@
 ## Visualizations
+  ## [Main  page](https://xdanielsb.github.io/EnergyVis/index.html)
+
  - ### Peak
     - [View](https://xdanielsb.github.io/EnergyVis/base/b1/b1.html)
     - [How to use it?](/base/b1/readme.md)
@@ -65,11 +67,15 @@ House2,750
 House3,800
 ```
 
+### Contributors
+
+#### Designer
+* Name:  Marlen Promann
+
+#### Developer
+* Name : Daniel Santos
+* Email : dfsantosbu@unal.edu.co
+
 ### License
 MIT
 **Free Software, It's the right way  to do things!**
-
-### About the author
-
-* Name : Daniel Santos
-* Email : dfsantosbu@unal.edu.co
