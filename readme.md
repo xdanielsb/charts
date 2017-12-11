@@ -12,7 +12,7 @@
  - ### Radial
     - [View](https://xdanielsb.github.io/EnergyVis/base/b3/b3.html)
     - [How to use it?](/base/b3/readme.md)
-    - [Library](/base/b1/radial.js)
+    - [Library](/base/b3/radial.js)
 
 
 ## Requirements
