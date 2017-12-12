@@ -155,7 +155,8 @@ function paint(nameDiv){
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.left + margin.right)
     .attr("transform", "translate(" + (margin.left) + "," + margin.top + ")")
-  //                    .style("border", "1px solid black")
+    .attr("stroke-width", "0")
+  //.style("border", "1px solid black")
 
   var x_axis = d3.axisBottom()
     .scale(xscale)
@@ -164,6 +165,9 @@ function paint(nameDiv){
   var y_axis = d3.axisLeft()
     .scale(yscale)
     .ticks(7)
+    .tickFormat(function (d) {
+      if(d > 0 ) return d
+    });
 
   // append a circle
   isvg.selectAll("circle")
@@ -176,7 +180,6 @@ function paint(nameDiv){
       return rscale(d);
     })
     .style("stroke", "black")
-    .style("stroke-width", 0)
     .style("fill", "rgba(0, 0, 0, 0.14)");
 
   let icircles = isvg.selectAll("circle")
@@ -186,17 +189,25 @@ function paint(nameDiv){
 
   isvg.append("g")
     .attr("transform", "translate(" + (width / 2) + ", " + 0 + ")")
-    .call(y_axis)
+     .call(y_axis)
 
   isvg.append("g")
     .attr("transform", "translate(" + 0 + ", " + (width / 2) + ")")
     .call(x_axis)
     .style("stroke-width", "0")
 
+  isvg.append("line")          // attach a line
+      .style("stroke", "black")  // colour the line
+      .style("stroke-width", "1")
+      .attr("x1", width/2)     // x position of the first end of the line
+      .attr("y1", 0)      // y position of the first end of the line
+      .attr("x2", width/2)     // x position of the second end of the line
+      .attr("y2", height/2);    // y position of the second end of the line
+
   //  now add titles and labels to the axes
   isvg.append("text")
     .attr("text-anchor", "middle") // this makes it easy to centre the text as the transform is applied to the anchor
-    .attr("transform", "translate(" + (width / 2 - 50) + "," + 10 + ")") // text is drawn off the screen top left, move down and out and rotate
+    .attr("transform", "translate(" + (width / 2 - 60) + "," + 10 + ")") // text is drawn off the screen top left, move down and out and rotate
     .text("kWh / Month");
 
   let iattr = icircles
