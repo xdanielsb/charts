@@ -4,7 +4,7 @@
  * @author Daniel Santos <dfsantosbu@unal.edu.co>
  * @version 1
  */
-const  radius = 15
+const  radius = 20
 /*
   @Constants: Setup letiables
 */
@@ -43,7 +43,7 @@ let iradios = []
   Utalitary functions
 */
 function getRadius(r) {
-  return (Maxradius / len) * 20 * (Maxradius / r)
+  return (Maxradius / len) * 35 * (Maxradius / r)
 }
 function getX(e, r) {
   let res = (width / len) * (r + 1) + x0
