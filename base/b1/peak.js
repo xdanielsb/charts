@@ -30,8 +30,8 @@ let legendRectSize = 18
 let legendSpacing = 4
 let color = d3.scaleOrdinal(d3.schemeCategory20b);
 let customColors = [
-  "blue",
-  "red"
+  "#737b78",
+  "#383429"
 ]
 let labelsLegends = [{ label: 'Your household'},
                {label: 'Other household'}];
