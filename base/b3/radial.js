@@ -148,12 +148,8 @@ function generate(dataset, baskets){
 */
 
 function paint(nameDiv){
-  let circles = []
-  //Create the circles to plot
-  //the faded circles
-  for (let i = 1; i < 4; i++) {
-    circles.push(400 * i)
-  }
+  let circles = [144, 700, 1150]
+
   let ibody = d3.select("#chart")
   let isvg = ibody.append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -180,7 +176,7 @@ function paint(nameDiv){
       return rscale(d);
     })
     .style("stroke", "black")
-    .style("stroke-width", 1)
+    .style("stroke-width", 0)
     .style("fill", "rgba(0, 0, 0, 0.14)");
 
   let icircles = isvg.selectAll("circle")
