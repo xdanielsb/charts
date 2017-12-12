@@ -262,7 +262,7 @@ class Radial {
             }
           }
         }
-        radius = parseInt(26*23/dataset.length)
+        radius = Math.min(23, parseInt(26*23/dataset.length))
         elements = generate(dataset, basket)
       }else{
         for (let e in data) {

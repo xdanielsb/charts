@@ -229,7 +229,7 @@ class BlackHole {
             }
           }
         }
-        radius = parseInt(26*48/dataset.length)
+        radius = Math.min(45, parseInt(26*45/dataset.length))
         elements = generate(dataset, basket)
       }else{
         for (let e in data) {
