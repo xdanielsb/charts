@@ -8,14 +8,14 @@
 /*
  @Constants: Setup variable
 */
-let height = 510
+let height = 450
 let width = height // restriction for being circles
 let Maxradius = 15
 let len = 0
 let x0 = 50
 let y0 = 30
 let home = 0
-let maxValue = 1100
+let maxValue = 1500
 let minX = 0
 let margin = {
  top: 20,
@@ -31,14 +31,14 @@ let legendRectSize = 18
 let legendSpacing = 4
 let color = d3.scaleOrdinal(d3.schemeCategory20b);
 let customColors = [
-  "#737b78",
-  "#383429"
+  "#A6A6A6",
+  "#595959"
 ]
 let labelsLegends = [{
    label: 'Your household'
  },
  {
-   label: 'Other household'
+   label: 'Other households'
  }
 ];
 
@@ -59,7 +59,7 @@ function getRadius(r) {
  return xscale(r)
 }
 function getX(e, r) {
- return xscale(elements[r]["x"]) + 135
+ return xscale(elements[r]["x"])  -minX
 }
 function getY(e, r) {
  //  let res = (maxValue - elements[r][1] ) /(maxValue/height) + y0
@@ -119,7 +119,11 @@ function generate(dataset, baskets){
         posx -= 5
       }
     }
-    minX = Math.min(minX, posx)
+    if(posx < 0){
+      minX = Math.min(minX, posx)
+      console.log(minX)
+    }
+
     elements.push({"radius":radius, "x":posx, "y":posy, "name":dataset[i][0]})
     baskets.set(bask,[ count,  many+1])
   }
@@ -135,15 +139,19 @@ function paint(nameDiv){
   let isvg = ibody.append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.left + margin.right)
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    .attr("transform", "translate(" + (margin.left+35) + "," + margin.top + ")")
   //                  .style("border", "1px solid black")
 
   let x_axis = d3.axisBottom()
     .scale(xscale)
     .ticks(0)
 
-  let y_axis = d3.axisLeft()
-    .scale(yscale)
+    let y_axis = d3.axisLeft()
+      .scale(yscale)
+      .tickPadding(7)
+      .ticks(5)
+      .tickValues(d3.range(0, maxValue+100, 300))
+      .tickSize(0,0)
 
   let icircles = isvg.selectAll("circle")
     .data(iradios)
@@ -180,25 +188,24 @@ function paint(nameDiv){
     .attr('transform', function (d, i) {
       let h = legendRectSize + legendSpacing;
       let offset = h * color.domain().length / 2;
-      let horz = i * 7 * h - offset + width / 4
+      let horz = i * 7 * h - offset + width / 4 +40*i
       let vert = (height + y0 + 30)
       return 'translate(' + horz + ',' + vert + ')';
     });
 
-  legend.append('rect')
-    .attr('width', legendRectSize)
-    .attr('height', legendRectSize)
-    .style('fill', function (d, i) {
-      return customColors[i];
-    })
-    .style('stroke', "black");
+    legend.append('circle')
+      .attr('r', 10)
+      .style('fill', function (d, i) {
+        return customColors[i];
+      })
+      .style('stroke', "black");
 
-  legend.append('text')
-    .attr('x', legendRectSize + legendSpacing)
-    .attr('y', legendRectSize - legendSpacing)
-    .text(function (d) {
-      return d.label;
-    });
+      legend.append('text')
+        .attr('x', legendRectSize + legendSpacing )
+        .attr('y', legendRectSize - legendSpacing -8)
+        .text(function (d) {
+          return d.label;
+        });
 }
 
 
@@ -240,7 +247,8 @@ class BlackHole {
             let y = parseInt(info["y"])
             let x = parseInt(info["x"])
             radius = value
-            minX = Math.min(minX, x)
+            if(x < 0)
+              minX = Math.min(minX, x)
             elements.push({"radius":value, "y":y,"x":x,  "name":name })
           }
         }
