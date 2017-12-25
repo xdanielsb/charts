@@ -43,7 +43,7 @@ let iradios = []
   Utalitary functions
 */
 function getRadius(r) {
-  return (Maxradius / len) * 35 * (Maxradius / r)
+  return (Maxradius / len) * 42 * (Maxradius / r)
 }
 function getX(e, r) {
   let res = (width / len) * (r + 1) + x0
@@ -96,7 +96,9 @@ function paint(nameDiv){
 
   let y_axis = d3.axisLeft()
     .scale(yscale)
+    .tickPadding(7)
     .ticks(5)
+    .tickValues(d3.range(0, maxValue+100, 300))
     .tickSize(0,0)
 
   let icircles = isvg.selectAll("circle")
