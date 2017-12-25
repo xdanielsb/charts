@@ -15,7 +15,7 @@ let len = 0
 let x0 = 50
 let y0 = 30
 let home = 0
-let maxValue = 1400
+let maxValue = 1500
 let margin = {
   top: 20,
   right: 40,
@@ -30,11 +30,11 @@ let legendRectSize = 18
 let legendSpacing = 4
 let color = d3.scaleOrdinal(d3.schemeCategory20b);
 let customColors = [
-  "#737b78",
-  "#383429"
+  "#A6A6A6",
+  "#595959"
 ]
 let labelsLegends = [{ label: 'Your household'},
-               {label: 'Other household'}];
+               {label: 'Other households'}];
 
 //Dataset =)
 let elements = []
@@ -80,7 +80,7 @@ function paint(nameDiv){
   let isvg = ibody.append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.left + margin.right)
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    .attr("transform", "translate(" + (margin.left +40)+ "," + margin.top + ")")
     //Axis
   let xscale = d3.scaleLinear()
     .domain([0, iradios.length])
@@ -96,7 +96,8 @@ function paint(nameDiv){
 
   let y_axis = d3.axisLeft()
     .scale(yscale)
-    .ticks(12)
+    .ticks(5)
+    .tickSize(0,0)
 
   let icircles = isvg.selectAll("circle")
     .data(iradios)
@@ -134,22 +135,21 @@ function paint(nameDiv){
     .attr('transform', function (d, i) {
       let h = legendRectSize + legendSpacing;
       let offset = h * color.domain().length / 2;
-      let horz = i * 7 * h - offset + width / 2
+      let horz = i * 10 * h - offset + width / 2 -50
       let vert = (height + y0 + 20)
       return 'translate(' + horz + ',' + vert + ')';
     });
 
-  legend.append('rect')
-    .attr('width', legendRectSize)
-    .attr('height', legendRectSize)
+  legend.append('circle')
+    .attr('r', 10)
     .style('fill', function (d, i) {
       return customColors[i];
     })
     .style('stroke', "black");
 
   legend.append('text')
-    .attr('x', legendRectSize + legendSpacing)
-    .attr('y', legendRectSize - legendSpacing)
+    .attr('x', legendRectSize + legendSpacing )
+    .attr('y', legendRectSize - legendSpacing -8)
     .text(function (d) {
       return d.label;
     });
