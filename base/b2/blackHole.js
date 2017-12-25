@@ -236,7 +236,7 @@ class BlackHole {
             }
           }
         }
-        radius = Math.min(45, parseInt(26*45/dataset.length))
+        radius = Math.min(60, parseInt(26*60/dataset.length))
         elements = generate(dataset, basket)
       }else{
         for (let e in data) {
@@ -247,8 +247,9 @@ class BlackHole {
             let y = parseInt(info["y"])
             let x = parseInt(info["x"])
             radius = value
-            if(x < 0)
+            if(x < 0){
               minX = Math.min(minX, x)
+            }
             elements.push({"radius":value, "y":y,"x":x,  "name":name })
           }
         }
