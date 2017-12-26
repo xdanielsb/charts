@@ -8,20 +8,20 @@
 /*
  @Constants: Setup variable
 */
-let height = 510
+let height = 520
 let width = height // restriction for being circles
 let Maxradius = 15
 let len = 0
 let x0 = 50
 let home = 1
 let y0 = 30
-let maxValue = 1100
+let maxValue = 1550
 let minX = 0
 let margin = {
  top: 20,
  right: 40,
  bottom: 40,
- left: 300
+ left: 360
 };
 
 /*
@@ -31,14 +31,14 @@ let legendRectSize = 18
 let legendSpacing = 4
 let color = d3.scaleOrdinal(d3.schemeCategory20b);
 let customColors = [
-  "#737b78",
-  "#383429"
+  "#A6A6A6",
+  "#595959"
 ]
 let labelsLegends = [{
    label: 'Your household'
  },
  {
-   label: 'Other household'
+   label: 'Other households'
  }
 ];
 
@@ -67,6 +67,7 @@ function getY(e, r) {
  return yscale(elements[r]["y"])
 }
 function getRadius(r) {
+  //console.log("real ",r, "new ", yscale(r))
   return rscale(r) *2
 }
 function getColor(d, i) {
@@ -90,7 +91,7 @@ function collide(circles, x, y){
   for(let i = 0; i<n ; i++){
     let c = circles[i]
     if( c["x"] == 0 && c["y"]==0 ) continue
-    if( Math.pow(c["x"]-x,2) + Math.pow(c["y"]-y,2) < Math.pow(2*radius,2) ) return true
+    if( Math.pow(c["x"]-x,2) + Math.pow(c["y"]-y,2) < Math.pow(2*100,2) ) return true
   }
   return false
 }
@@ -119,26 +120,35 @@ function generate(dataset, baskets){
     let bask = getBask(dataset[i][1])
     let many =  baskets.get(bask)[1]
     let count = baskets.get(bask)[0]
-    let angle = 360 / count
+    let rand = Math.floor((Math.random() * 90) + 0);
+    let angle = 90 +rand
 
     let aux = rotate(posx, posy, t)
     posx = aux[0], posy = aux[1]
     t += angle
     let times = 0
+    let ok = true;
     while(collide(elements, posx, posy)){
       times += 1
       console.log("wtf")
       t = parseInt(t)%360
       t += angle
-      if(times>=100){
-        break;
-        //needs to  improve it
+      if(times>=(360/angle)){
+        times = 1
+        angle = angle /2
       }
       aux = rotate(posx,posy, t)
       posx = aux[0], posy = aux[1]
+      if(angle < 1) {
+        console.log("super tired")
+        ok = false;
+        break
+      }
     }
-    elements.push({"radius":radius, "x":posx, "y":posy, "name":dataset[i][0]})
-    baskets.set(bask,[ count+1,  many+1])
+    if(ok){
+      elements.push({"radius":radius, "x":posx, "y":posy, "name":dataset[i][0]})
+      baskets.set(bask,[ count+1,  many+1])
+    }
   }
   return elements
 }
@@ -148,13 +158,13 @@ function generate(dataset, baskets){
 */
 
 function paint(nameDiv){
-  let circles = [144, 700, 1150]
+  let circles = [1150, 700, 144]
 
   let ibody = d3.select("#chart")
   let isvg = ibody.append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.left + margin.right)
-    .attr("transform", "translate(" + (margin.left) + "," + margin.top + ")")
+    .attr("transform", "translate(" + (margin.left) + "," + (margin.top )+ ")")
     .attr("stroke-width", "0")
   //.style("border", "1px solid black")
 
@@ -164,10 +174,11 @@ function paint(nameDiv){
 
   var y_axis = d3.axisLeft()
     .scale(yscale)
-    .ticks(7)
+    .ticks(8)
     .tickFormat(function (d) {
       if(d > 0 ) return d
-    });
+    })
+    .tickPadding(0)
 
   // append a circle
   isvg.selectAll("circle")
@@ -180,7 +191,11 @@ function paint(nameDiv){
       return rscale(d);
     })
     .style("stroke", "black")
-    .style("fill", "rgba(0, 0, 0, 0.14)");
+    .style("fill",function(d,i){
+      if(i == 2) return "#AAAAAA";
+      if(i == 1) return "#D9D9D9";
+      if(i == 0) return "#F2F2F2";
+    });
 
   let icircles = isvg.selectAll("circle")
     .data(iradios)
@@ -207,7 +222,7 @@ function paint(nameDiv){
   //  now add titles and labels to the axes
   isvg.append("text")
     .attr("text-anchor", "middle") // this makes it easy to centre the text as the transform is applied to the anchor
-    .attr("transform", "translate(" + (width / 2 - 60) + "," + 10 + ")") // text is drawn off the screen top left, move down and out and rotate
+    .attr("transform", "translate(" + (width / 2  + 60) + "," + 10 + ")") // text is drawn off the screen top left, move down and out and rotate
     .text("kWh / Month");
 
   let iattr = icircles
@@ -229,20 +244,19 @@ function paint(nameDiv){
       return 'translate(' + (horz) + ',' + vert + ')';
     });
 
-  legend.append('rect')
-    .attr('width', legendRectSize)
-    .attr('height', legendRectSize)
-    .style('fill', function (d, i) {
-      return customColors[i];
-    })
-    .style('stroke', "black");
+    legend.append('circle')
+      .attr('r', 10)
+      .style('fill', function (d, i) {
+        return customColors[i];
+      })
+      .style('stroke', "black");
 
-  legend.append('text')
-    .attr('x', legendRectSize + legendSpacing)
-    .attr('y', legendRectSize - legendSpacing)
-    .text(function (d) {
-      return d.label;
-    });
+    legend.append('text')
+      .attr('x', legendRectSize + legendSpacing )
+      .attr('y', legendRectSize - legendSpacing -8)
+      .text(function (d) {
+        return d.label;
+      });
 }
 
 
@@ -273,7 +287,7 @@ class Radial {
             }
           }
         }
-        radius = Math.min(23, parseInt(26*23/dataset.length))
+        radius =  Math.min(30, parseInt(26*30/dataset.length))
         elements = generate(dataset, basket)
       }else{
         for (let e in data) {
