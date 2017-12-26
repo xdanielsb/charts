@@ -200,12 +200,12 @@ function paint(nameDiv){
       })
       .style('stroke', "black");
 
-      legend.append('text')
-        .attr('x', legendRectSize + legendSpacing )
-        .attr('y', legendRectSize - legendSpacing -8)
-        .text(function (d) {
-          return d.label;
-        });
+    legend.append('text')
+      .attr('x', legendRectSize + legendSpacing )
+      .attr('y', legendRectSize - legendSpacing -8)
+      .text(function (d) {
+        return d.label;
+      });
 }
 
 
