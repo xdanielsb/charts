@@ -91,7 +91,8 @@ function collide(circles, x, y){
   for(let i = 0; i<n ; i++){
     let c = circles[i]
     if( c["x"] == 0 && c["y"]==0 ) continue
-    if( Math.pow(c["x"]-x,2) + Math.pow(c["y"]-y,2) < Math.pow(2*100,2) ) return true
+    let aux = radius*100/30
+    if( Math.pow(c["x"]-x,2) + Math.pow(c["y"]-y,2) < Math.pow(2*aux,2) ) return true
   }
   return false
 }
