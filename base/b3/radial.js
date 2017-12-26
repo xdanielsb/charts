@@ -202,6 +202,33 @@ function paint(nameDiv){
     .enter()
     .append("circle")
 
+  let arrows = [0,1,2,3,4,5,6,7]
+  let arrowsy1 = [22, 22, 117, 117,230, 230, width/2, width/2]
+
+  let iarrows = isvg.selectAll("line")
+    .data(arrows)
+    .enter()
+    .append("line")
+
+
+  let iattr = iarrows
+    .style("stroke", function(d,i){
+      if(i%2==0)return "gray"
+      return "gray"
+    })
+    .style("stroke-width", "3")
+    .attr("x1", width/2)
+    .attr("y1",  function(d,i){
+      return arrowsy1[i]
+    })
+    .attr("x2", function(d,i){
+       if (i%2==0) return width/2 -9
+       else return width/2 +9
+    })
+    .attr("y2",  function(d,i){
+       return arrowsy1[i] -15
+    });
+
   isvg.append("g")
     .attr("transform", "translate(" + (width / 2) + ", " + 0 + ")")
      .call(y_axis)
@@ -225,7 +252,7 @@ function paint(nameDiv){
     .attr("transform", "translate(" + (width / 2  + 60) + "," + 10 + ")") // text is drawn off the screen top left, move down and out and rotate
     .text("kWh / Month");
 
-  let iattr = icircles
+  let iattra = icircles
     .attr("cx", getX)
     .attr("cy", getY)
     .attr("r", getRadius)
