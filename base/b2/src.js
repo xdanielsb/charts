@@ -76,3 +76,5 @@ elements.push({"radius":value,"y":y,"x":x,"name":name})}}}
 len=elements.length
 iradios=arrayColumn(elements,"radius")
 paint(nameDiv)})}}
+let bh = new BlackHole("../../data/data1.csv")
+bh.plot("chart", 15)

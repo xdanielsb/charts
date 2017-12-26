@@ -1,5 +1,5 @@
 'use strict'
-const radius=20
+let radius=20
 let height=400
 let width=1000
 let Maxradius=15
@@ -54,3 +54,5 @@ elements.push({"radius":value,"y":y,"name":name})}}}
 len=elements.length
 iradios=arrayColumn(elements,"radius")
 paint(nameDiv)})}}
+let peak = new Peak("../../data/data1.csv")
+peak.plot("chart", 15)
