@@ -54,5 +54,5 @@ elements.push({"radius":value,"y":y,"name":name})}}}
 len=elements.length
 iradios=arrayColumn(elements,"radius")
 paint(nameDiv)})}}
-let peak = new Peak("../../data/data1.csv")
+let peak = new Peak("../data1.csv")
 peak.plot("chart", 15)
