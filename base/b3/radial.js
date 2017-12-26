@@ -266,8 +266,8 @@ function paint(nameDiv){
     .attr('transform', function (d, i) {
       let h = legendRectSize + legendSpacing;
       let offset = h * color.domain().length / 2;
-      let horz = width - 130
-      let vert = height - (i * 30)
+      let horz = width - 110
+      let vert = height - (i * 50)
       return 'translate(' + (horz) + ',' + vert + ')';
     });
 
