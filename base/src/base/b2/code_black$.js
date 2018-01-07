@@ -44,7 +44,7 @@ let labelsLegends = [{
 
 let elements = []
 let iradios = []
-let radius = 0
+let radius = 65
 let delta = 0
 
 let xscale = d3.scaleLinear()
@@ -89,7 +89,7 @@ function collide(circles, x, y){
   for(let i = 0; i<n ; i++){
     let c = circles[i]
     if( c["x"] == 0 && c["y"]==0 ) continue
-    if( Math.pow(c["x"]-x,2) + Math.pow(c["y"]-y,2) < Math.pow(2*radius+3,2) ) return true
+    if( Math.pow(c["x"]-x,2) + Math.pow(c["y"]-y,2) < Math.pow(2*radius,2) ) return true
   }
   return false
 }
@@ -100,19 +100,18 @@ function collide(circles, x, y){
 function generate(dataset, baskets){
   let cont = 0, posx =0, posy =0
   let n = dataset.length
-  console.log(baskets)
-
   for( let i=0; i<n ; ++i){
     let bask = getBask(dataset[i][1])
     posy = dataset[i][1]
     let many =  baskets.get(bask)[1]
     let count = baskets.get(bask)[0]
+    console.log(radius)
     if( many == 0 ){
       posx = width/2
     }else if( many % 2 != 0  ){
-      posx =  width / 2  + 2*radius*((many+1)/2)  +delta*(many+1)
+      posx =  width / 2  + 2*radius*(many/2)
     }else{
-      posx =  width / 2 - 2*radius*(many/2)  - delta*(many+1)
+      posx =  width / 2  - 2*radius*(many/2)
     }
     while(collide(elements, posx, posy)){
       console.log("mgd")
@@ -253,7 +252,7 @@ class BlackHole {
             }
           }
         }
-        radius = Math.min(yscale(15), parseInt(26*60/dataset.length))
+      //  radius = 62//Math.min(yscale(15), parseInt(26*60/dataset.length))
         dataset = shuffleArray(dataset)
         elements = generate(dataset, basket)
       }else{
