@@ -202,7 +202,6 @@ function paint(nameDiv){
     })
     .style("stroke", "black")
     .style("fill",function(d){
-      console.log(d.id)
       if(d.id == 993) return "#AAAAAA";
       if(d.id  == 992) return "#D9D9D9";
       if(d.id  == 991) return "#F2F2F2";
@@ -344,8 +343,6 @@ class Radial {
         }
       }
       len =  elements.length
-      console.log(elements)
-      console.log(elements.length)
       iradios = arrayColumn(elements, "radius")
 
       paint(nameDiv)
