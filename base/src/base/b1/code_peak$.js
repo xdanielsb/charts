@@ -12,7 +12,7 @@ let height = 400
 let width = 1000
 let Maxradius = 15
 let len = 0
-let x0 = 50
+let x0 = 70
 let y0 = 30
 let home = 0
 let maxValue = 1500
@@ -42,11 +42,23 @@ let iradios = []
 /*
   Utalitary functions
 */
+
+//Axis
+let xscale = d3.scaleLinear()
+.domain([0, iradios.length])
+.range([0, width]); //actual length of axis
+
+let yscale = d3.scaleLinear()
+.domain([0, maxValue])
+.range([height, 0]) //actual length of axis
+
 function getRadius(r) {
-  return (Maxradius / len) * 42 * (Maxradius / r)
+  let res = 18.9 //(Maxradius / len) * 42 * (Maxradius / r)
+  //console.log(res)
+  return res
 }
 function getX(e, r) {
-  let res = (width / len) * (r + 1) + x0
+  let res = (width / len) * (r + 1) + 51
   return res
 }
 function getY(e, r) {
@@ -81,14 +93,6 @@ function paint(nameDiv){
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.left + margin.right)
     .attr("transform", "translate(" + (margin.left +40)+ "," + margin.top + ")")
-    //Axis
-  let xscale = d3.scaleLinear()
-    .domain([0, iradios.length])
-    .range([0, width]); //actual length of axis
-
-  let yscale = d3.scaleLinear()
-    .domain([0, maxValue])
-    .range([height, 0]) //actual length of axis
 
   let x_axis = d3.axisBottom()
     .scale(xscale)
@@ -118,7 +122,7 @@ function paint(nameDiv){
   //  now add titles and labels to the axes
   isvg.append("text")
     .attr("text-anchor", "middle") // this makes it easy to centre the text as the transform is applied to the anchor
-    .attr("transform", "translate(" + 15 + "," + (height / 2) + ")rotate(-90)") // text is drawn off the screen top left, move down and out and rotate
+    .attr("transform", "translate(" + 20 + "," + (height / 2) + ")rotate(-90)") // text is drawn off the screen top left, move down and out and rotate
     .text("kWh / Month")
     .attr("class", "tittle")
 
@@ -137,8 +141,8 @@ function paint(nameDiv){
     .attr('transform', function (d, i) {
       let h = legendRectSize + legendSpacing;
       let offset = h * color.domain().length / 2;
-      let horz = i * 10 * h - offset + width / 2 -50
-      let vert = (height + y0 + 20)
+      let horz = i * 10 * h - offset + width / 2 -100
+      let vert = (height + y0 + 40)
       return 'translate(' + horz + ',' + vert + ')';
     });
 
@@ -147,7 +151,7 @@ function paint(nameDiv){
     .style('fill', function (d, i) {
       return customColors[i];
     })
-    .style('stroke', "black");
+    //.style('stroke', "black");
 
   legend.append('text')
     .attr('x', legendRectSize + legendSpacing )
