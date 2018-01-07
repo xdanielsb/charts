@@ -10,11 +10,11 @@
 */
 let height = 450
 let width = height // restriction for being circles
-let Maxradius = 15
+let Maxradius = 15//19.5
 let len = 0
-let x0 = 50
-let y0 = 30
-let home = 0
+let x0 = 65
+let y0 = 20
+let home = 1
 let maxValue = 1500
 let minX = 0
 let margin = {
@@ -56,17 +56,20 @@ let yscale = d3.scaleLinear()
  .range([height, 0]) //actual length of axis
 
 function getRadius(r) {
- return xscale(r)
+ let res = 19.5 // xscale(r)
+ return res
 }
 function getX(e, r) {
- return xscale(elements[r]["x"])  -minX
+  //console.log(elements[r]["x"], elements[r]["x"])
+ return xscale(elements[r]["x"]) -xscale(minX) +x0+radius
 }
 function getY(e, r) {
  //  let res = (maxValue - elements[r][1] ) /(maxValue/height) + y0
  return yscale(elements[r]["y"]) + y0
 }
 function getColor(d, i) {
- if (i == home) return customColors[0]
+  console.log()
+ if (elements[i]["name"] == "House"+home) return customColors[0]
  return customColors[1]
 }
 
@@ -86,7 +89,7 @@ function collide(circles, x, y){
   for(let i = 0; i<n ; i++){
     let c = circles[i]
     if( c["x"] == 0 && c["y"]==0 ) continue
-    if( Math.pow(c["x"]-x,2) + Math.pow(c["y"]-y,2) < Math.pow(2*radius,2) ) return true
+    if( Math.pow(c["x"]-x,2) + Math.pow(c["y"]-y,2) < Math.pow(2*radius+3,2) ) return true
   }
   return false
 }
@@ -121,7 +124,6 @@ function generate(dataset, baskets){
     }
     if(posx < 0){
       minX = Math.min(minX, posx)
-      console.log(minX)
     }
 
     elements.push({"radius":radius, "x":posx, "y":posy, "name":dataset[i][0]})
@@ -188,8 +190,8 @@ function paint(nameDiv){
     .attr('transform', function (d, i) {
       let h = legendRectSize + legendSpacing;
       let offset = h * color.domain().length / 2;
-      let horz = i * 7 * h - offset + width / 4 +40*i
-      let vert = (height + y0 + 30)
+      let horz = i * 7 * h - offset + width / 4 +40*i+15
+      let vert = (height + y0 + 50)
       return 'translate(' + horz + ',' + vert + ')';
     });
 
@@ -198,7 +200,7 @@ function paint(nameDiv){
       .style('fill', function (d, i) {
         return customColors[i];
       })
-      .style('stroke', "black");
+      //.style('stroke', "black");
 
     legend.append('text')
       .attr('x', legendRectSize + legendSpacing )
@@ -206,6 +208,21 @@ function paint(nameDiv){
       .text(function (d) {
         return d.label;
       });
+}
+
+
+/**
+ * Randomize array element order in-place.
+ * Using Durstenfeld shuffle algorithm.
+ */
+function shuffleArray(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array
 }
 
 
@@ -236,7 +253,8 @@ class BlackHole {
             }
           }
         }
-        radius = Math.min(60, parseInt(26*60/dataset.length))
+        radius = Math.min(yscale(15), parseInt(26*60/dataset.length))
+        dataset = shuffleArray(dataset)
         elements = generate(dataset, basket)
       }else{
         for (let e in data) {
