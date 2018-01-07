@@ -61,10 +61,10 @@ let rscale = d3.scaleLinear()
   .range([0, height]);
 
 function getX(e, r) {
- return xscale(elements[r]["x"])
+ return xscale(elements[r-3]["x"])
 }
 function getY(e, r) {
- return yscale(elements[r]["y"])
+ return yscale(elements[r-3]["y"])
 }
 function getRadius(r) {
   //console.log("real ",r, "new ", yscale(r))
@@ -142,7 +142,7 @@ function generate(dataset, baskets){
       posx = aux[0], posy = aux[1]
       if(angle < 1) {
         console.log("super tired")
-        ok = false;
+      //  ok = false;
         break
       }
     }
@@ -159,7 +159,6 @@ function generate(dataset, baskets){
 */
 
 function paint(nameDiv){
-  let circles = [1150, 700, 144]
 
   let ibody = d3.select("#chart")
   let isvg = ibody.append("svg")
@@ -175,49 +174,67 @@ function paint(nameDiv){
 
   var y_axis = d3.axisLeft()
     .scale(yscale)
-    .ticks(8)
+    .tickValues([500, 1000, 1500])
     .tickFormat(function (d) {
       if(d > 0 ) return d
     })
-    .tickPadding(0)
+    .tickPadding(5)
+
+
+  let bol = [
+      {id: 991,radio:1150},
+      {id: 992,radio:700},
+      {id: 993,radio:144}
+  ]
+
 
   // append a circle
-  isvg.selectAll("circle")
-    .data(circles)
+  let ic =   isvg.selectAll("circle")
+    .data(bol, function(d){
+      return d.radio
+    })
     .enter()
     .append("circle")
     .attr("cx", xscale(0))
     .attr("cy", yscale(0))
     .attr("r", function (d) {
-      return rscale(d);
+      return rscale(d.radio);
     })
     .style("stroke", "black")
-    .style("fill",function(d,i){
-      if(i == 2) return "#AAAAAA";
-      if(i == 1) return "#D9D9D9";
-      if(i == 0) return "#F2F2F2";
+    .style("fill",function(d){
+      console.log(d.id)
+      if(d.id == 993) return "#AAAAAA";
+      if(d.id  == 992) return "#D9D9D9";
+      if(d.id  == 991) return "#F2F2F2";
     });
 
-  let icircles = isvg.selectAll("circle")
+  iradios.unshift(0)
+  iradios.unshift(0)
+  iradios.unshift(0)
+
+  isvg.selectAll("circle")
     .data(iradios)
     .enter()
     .append("circle")
+    .attr("cx", getX)
+    .attr("cy", getY)
+    .attr("r", getRadius)
+    .style("fill", getColor)
 
   let arrows = [0,1,2,3,4,5,6,7]
   let arrowsy1 = [22, 22, 117, 117,230, 230, width/2, width/2]
-
   let iarrows = isvg.selectAll("line")
     .data(arrows)
     .enter()
     .append("line")
-
 
   let iattr = iarrows
     .style("stroke", function(d,i){
       if(i%2==0)return "gray"
       return "gray"
     })
-    .style("stroke-width", "3")
+    .style("stroke-width", "1")
+    .style("stroke", "black")  // colour the line
     .attr("x1", width/2)
     .attr("y1",  function(d,i){
       return arrowsy1[i]
@@ -253,11 +270,6 @@ function paint(nameDiv){
     .attr("transform", "translate(" + (width / 2  + 60) + "," + 10 + ")") // text is drawn off the screen top left, move down and out and rotate
     .text("kWh / Month");
 
-  let iattra = icircles
-    .attr("cx", getX)
-    .attr("cy", getY)
-    .attr("r", getRadius)
-    .style("fill", getColor)
 
   let legend = isvg.selectAll('.legend')
     .data(labelsLegends)
@@ -267,8 +279,8 @@ function paint(nameDiv){
     .attr('transform', function (d, i) {
       let h = legendRectSize + legendSpacing;
       let offset = h * color.domain().length / 2;
-      let horz = width - 110
-      let vert = height - (i * 50)
+      let horz = width
+      let vert = height/1.2 - (i * 50)
       return 'translate(' + (horz) + ',' + vert + ')';
     });
 
@@ -285,6 +297,7 @@ function paint(nameDiv){
       .text(function (d) {
         return d.label;
       });
+
 }
 
 
@@ -315,7 +328,7 @@ class Radial {
             }
           }
         }
-        radius =  Math.min(30, parseInt(26*30/dataset.length))
+        radius =  30 // Math.min(30, parseInt(26*30/dataset.length))
         elements = generate(dataset, basket)
       }else{
         for (let e in data) {
@@ -331,7 +344,10 @@ class Radial {
         }
       }
       len =  elements.length
+      console.log(elements)
+      console.log(elements.length)
       iradios = arrayColumn(elements, "radius")
+
       paint(nameDiv)
     })
   }

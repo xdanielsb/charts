@@ -105,7 +105,7 @@ function generate(dataset, baskets){
     posy = dataset[i][1]
     let many =  baskets.get(bask)[1]
     let count = baskets.get(bask)[0]
-    console.log(radius)
+  //  console.log(radius)
     if( many == 0 ){
       posx = width/2
     }else if( many % 2 != 0  ){
