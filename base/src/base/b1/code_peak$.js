@@ -163,16 +163,30 @@ function paint(nameDiv){
 
 
 class Peak {
-  constructor(nameFile){
-    this.nameFile = nameFile
+  constructor(file){
+    this.file = file
   }
   plot(nameDiv, myhome, flag=true){
     home = myhome
     // utilitary function
     const arrayColumn = (arr, n) => arr.map(x => x[n])
-    d3.csv(this.nameFile, function (data) {
+    if(flag){
+      d3.csv(this.file, function (data) {
+        let dataset = []
+        for (let e in data) {
+          let info = data[e]
+          let name = info["name"]
+          let value = parseInt(info["y"])
+          dataset.push([name, value])
+        }
+        elements = generate(dataset)
+        len = elements.length
+        iradios = arrayColumn(elements, "radius")
+        paint(nameDiv)
+      })
+    }else{
       let dataset = []
-      for (let e in data) {
+      for (let e in this.file) {
         let info = data[e]
         let name = info["name"]
         let value = parseInt(info["y"])
@@ -182,6 +196,7 @@ class Peak {
       len = elements.length
       iradios = arrayColumn(elements, "radius")
       paint(nameDiv)
-    })
+    }
+
   }
 }
