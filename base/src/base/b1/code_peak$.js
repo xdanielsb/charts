@@ -170,28 +170,15 @@ class Peak {
     home = myhome
     // utilitary function
     const arrayColumn = (arr, n) => arr.map(x => x[n])
-
     d3.csv(this.nameFile, function (data) {
-      if(flag){
-        let dataset = []
-        for (let e in data) {
-          let info = data[e]
-          let name = info["name"]
-          let value = parseInt(info["y"])
-          dataset.push([name, value])
-        }
-        elements = generate(dataset)
-      }else{
-        for (let e in data) {
-          let info = data[e]
-          let name = info["name"]
-          if (info["y"]) {
-            let value = parseInt(info["radius"])
-            let y = parseInt(info["y"])
-            elements.push({"radius":value, "y":y, "name":name })
-          }
-        }
+      let dataset = []
+      for (let e in data) {
+        let info = data[e]
+        let name = info["name"]
+        let value = parseInt(info["y"])
+        dataset.push([name, value])
       }
+      elements = generate(dataset)
       len = elements.length
       iradios = arrayColumn(elements, "radius")
       paint(nameDiv)
