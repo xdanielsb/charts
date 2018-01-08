@@ -226,16 +226,15 @@ function shuffleArray(array) {
 
 
 class BlackHole {
-  constructor(nameFile){
-    this.nameFile = nameFile
+  constructor(file){
+    this.file = file
   }
   plot(nameDiv, myhome, flag=true){
     // utilitary function
     const arrayColumn = (arr, n) => arr.map(x => x[n])
     home = myhome
-
-    d3.csv(this.nameFile, function (data) {
-      if(flag){
+    if(flag){
+      d3.csv(this.file, function (data) {
         let dataset = []
         let basket = new Map()
         for (let e in data) {
@@ -252,28 +251,36 @@ class BlackHole {
             }
           }
         }
-      //  radius = 62//Math.min(yscale(15), parseInt(26*60/dataset.length))
+        //  radius = 62//Math.min(yscale(15), parseInt(26*60/dataset.length))
         dataset = shuffleArray(dataset)
         elements = generate(dataset, basket)
-      }else{
-        for (let e in data) {
-          let info = data[e]
-          let name = info["name"]
-          if (info["y"]) {
-            let value = parseInt(info["radius"])
-            let y = parseInt(info["y"])
-            let x = parseInt(info["x"])
-            radius = value
-            if(x < 0){
-              minX = Math.min(minX, x)
-            }
-            elements.push({"radius":value, "y":y,"x":x,  "name":name })
+        len =  elements.length
+        iradios = arrayColumn(elements, "radius")
+        paint(nameDiv)
+      })
+    }else{
+      let dataset = []
+      let basket = new Map()
+      for (let e in this.file) {
+        let info = data[e]
+        let name = info["name"]
+        let value = parseInt(info["y"])
+        if(name){
+          dataset.push([name, value])
+          let x = getBask(value)
+          if(!basket.has(x)){
+            basket.set(x, [0,0])
+          }else{
+            basket.set(x, [basket.get(x)[0]+1,0])
           }
         }
       }
+      //  radius = 62//Math.min(yscale(15), parseInt(26*60/dataset.length))
+      dataset = shuffleArray(dataset)
+      elements = generate(dataset, basket)
       len =  elements.length
       iradios = arrayColumn(elements, "radius")
       paint(nameDiv)
-    })
+    }
   }
 }
