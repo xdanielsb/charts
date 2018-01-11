@@ -10,7 +10,6 @@
 */
 let height = 450
 let width = height // restriction for being circles
-let Maxradius = 15//19.5
 let len = 0
 let x0 = 65
 let y0 = 20
@@ -44,7 +43,7 @@ let labelsLegends = [{
 
 let elements = []
 let iradios = []
-let radius = 65
+let radius = 60
 let delta = 0
 
 let xscale = d3.scaleLinear()
@@ -106,19 +105,13 @@ function generate(dataset, baskets){
     let many =  baskets.get(bask)[1]
     let count = baskets.get(bask)[0]
   //  console.log(radius)
-    if( many == 0 ){
-      posx = width/2
-    }else if( many % 2 != 0  ){
-      posx =  width / 2  + 2*radius*(many/2)
-    }else{
-      posx =  width / 2  - 2*radius*(many/2)
-    }
+    posx = width/2
     while(collide(elements, posx, posy)){
       console.log("mgd")
       if( many % 2 != 0  ){
-        posx += 5
+        posx += 1
       }else{
-        posx -= 5
+        posx -= 1
       }
     }
     if(posx < 0){
@@ -252,7 +245,7 @@ class BlackHole {
           }
         }
         //  radius = 62//Math.min(yscale(15), parseInt(26*60/dataset.length))
-        dataset = shuffleArray(dataset)
+        //    dataset = shuffleArray(dataset)
         elements = generate(dataset, basket)
         len =  elements.length
         iradios = arrayColumn(elements, "radius")
@@ -276,7 +269,7 @@ class BlackHole {
         }
       }
       //  radius = 62//Math.min(yscale(15), parseInt(26*60/dataset.length))
-      dataset = shuffleArray(dataset)
+     //  dataset = shuffleArray(dataset)
       elements = generate(dataset, basket)
       len =  elements.length
       iradios = arrayColumn(elements, "radius")
