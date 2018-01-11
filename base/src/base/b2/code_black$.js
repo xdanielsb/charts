@@ -99,27 +99,31 @@ function collide(circles, x, y){
 function generate(dataset, baskets){
   let cont = 0, posx =0, posy =0
   let n = dataset.length
+
+
+  let lenstept =1
   for( let i=0; i<n ; ++i){
-    let bask = getBask(dataset[i][1])
+    let step = 0
+    let flag = true;
     posy = dataset[i][1]
-    let many =  baskets.get(bask)[1]
-    let count = baskets.get(bask)[0]
-  //  console.log(radius)
     posx = width/2
-    while(collide(elements, posx, posy)){
-      console.log("mgd")
-      if( many % 2 != 0  ){
-        posx += 1
+    while(flag){
+      if(!collide(elements, posx+step, posy)){
+        posx = posx +step
+        flag = false;
+      }else if(!collide(elements, posx-step, posy)){
+        posx = posx -step
+        flag = false
       }else{
-        posx -= 1
+        console.log(step)
+        step  += lenstept
       }
     }
     if(posx < 0){
       minX = Math.min(minX, posx)
     }
-
+    console.log(posx, posy)
     elements.push({"radius":radius, "x":posx, "y":posy, "name":dataset[i][0]})
-    baskets.set(bask,[ count,  many+1])
   }
   return elements
 }
@@ -217,6 +221,13 @@ function shuffleArray(array) {
   return array
 }
 
+function sortFunction(a,b){
+  if (a[1] === b[1]) {
+    return 0;
+  }
+  return (a[1] < b[1]) ? -1 : 1;
+}
+
 
 class BlackHole {
   constructor(file){
@@ -245,7 +256,9 @@ class BlackHole {
           }
         }
         //  radius = 62//Math.min(yscale(15), parseInt(26*60/dataset.length))
-        //    dataset = shuffleArray(dataset)
+        //dataset = shuffleArray(dataset)
+    //    console.log(dataset)
+      //  dataset.sort(sortFunction)
         elements = generate(dataset, basket)
         len =  elements.length
         iradios = arrayColumn(elements, "radius")
