@@ -85,10 +85,10 @@ peak.plot("chart", myHouse, false)
 Contributors
 ------------
 
-#### Designer
-* Name:  Marlen Promann
-* Email: marlen.promann@gmail.com
-* GitHub : [Promann](https://github.com/promann)
+#### Designers
+* Marlen Promann |  marlen.promann@gmail.com | [Github](https://github.com/promann)
+
+* Sabine Brunswicker |  sabine.brunswicker@gmail.com | [Github](https://github.com/sbrunswi)
 
 #### Developer
 * Name : Daniel Santos
