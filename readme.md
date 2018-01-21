@@ -15,17 +15,17 @@ This projects is over d3 so you must include **D3.js** version 4. Depending on t
 
 #### Radial
 ```html
-  <script src="code_radial$.js"></script>
+  <script src="https://cdn.rawgit.com/xdanielsb/Energy/e21a8fa8/base/b3/code_radial$.js"></script>
 ```
 
 #### Peaks
 ```html
-  <script src="code_peak$.js"></script>
+  <script src="https://cdn.rawgit.com/xdanielsb/Energy/e21a8fa8/base/b1/code_peak$.js"></script>
 ```
 
 #### Black
 ```html
-  <script src="code_black$.js"></script>
+  <script src="https://cdn.rawgit.com/xdanielsb/Energy/e21a8fa8/base/b2/code_black$.js"></script>
 ```
 
 ## Configuration in your html
