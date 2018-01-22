@@ -11,6 +11,15 @@ body {
     /*background-color: rgba(255, 0, 0, 0.5);*/
 }
 
+.enlarge:hover {
+    position:relative;
+    top:-25px;
+    width:150px;
+    height:auto;
+    display:block;
+    z-index:999;
+}
+
 .container {
   position: absolute;
   z-index: -1;
