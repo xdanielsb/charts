@@ -6,7 +6,7 @@ window.addEventListener( 'load', function(){
 
     var params = {
         nbBalls : 40,
-         color1 : [ 30, 38, 48 ],
+         color1 : [ 0, 0, 0],
         // color2 : [ 251, 53, 80 ]
         color2: [19,69, 198]
         // rgb(19, 69, 198)
