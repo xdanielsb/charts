@@ -2,7 +2,7 @@
 
 body {
     color: white;
-    
+
     font-family: Open Sans;
 }
 
@@ -14,9 +14,8 @@ body {
 
 .enlarge:hover {
     position:relative;
-    top:-25px;
     width:150px;
-    height:auto;
+    height:150px;
     display:block;
     z-index:999;
 }
