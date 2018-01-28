@@ -5,13 +5,23 @@ function printTable(file) {
     var csv = event.target.result;
     var data = $.csv.toArrays(csv);
     var html = '';
+    var dataj = []
     for(var row in data) {
       html += '<tr>\r';
       for(var item in data[row]) {
         html += '<td>' + data[row][item] + '</td>\r';
       }
+      if(row > 0){
+        dataj.push({name: data[row][0], y:data[row][1]})
+      }
       html += '</tr>\r';
     }
+    
+    let peak1 = new Peak(dataj)
+    let myHouse1 = 1
+    document.getElementById('chart').innerHTML = ""
+    peak1.plot("chart", myHouse1, false)
+
     $('#contents').html(html);
   };
   reader.onerror = function(){

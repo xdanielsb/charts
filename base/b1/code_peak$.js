@@ -186,7 +186,8 @@ class Peak {
       })
     }else{
       let dataset = []
-      for (let e in this.file) {
+      let data = this.file
+      for (let e in data) {
         let info = data[e]
         let name = info["name"]
         let value = parseInt(info["y"])
