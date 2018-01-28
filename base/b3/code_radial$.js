@@ -112,6 +112,7 @@ function rotate(nx, ny , a){
  Logic to generate the locations
 */
 function generate(dataset, baskets){
+  elements= []
   let cont = 0, posx =0.0, posy =0.0
   let n = dataset.length
   let t = 0.0
@@ -131,7 +132,7 @@ function generate(dataset, baskets){
     let ok = true;
     while(collide(elements, posx, posy)){
       times += 1
-      console.log("wtf")
+    //  console.log("wtf")
       t = parseInt(t)%360
       t += angle
       if(times>=(360/angle)){
@@ -141,7 +142,7 @@ function generate(dataset, baskets){
       aux = rotate(posx,posy, t)
       posx = aux[0], posy = aux[1]
       if(angle < 1) {
-        console.log("super tired")
+  //      console.log("super tired")
       //  ok = false;
         break
       }

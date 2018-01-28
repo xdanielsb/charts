@@ -67,7 +67,7 @@ function getY(e, r) {
  return yscale(elements[r]["y"]) + y0
 }
 function getColor(d, i) {
-  console.log()
+//  console.log()
  if (elements[i]["name"] == "House"+home) return customColors[0]
  return customColors[1]
 }
@@ -97,6 +97,7 @@ function collide(circles, x, y){
  Logic to generate the locations
 */
 function generate(dataset, baskets){
+  elements = []
   let cont = 0, posx =0, posy =0
   let n = dataset.length
 
@@ -115,14 +116,14 @@ function generate(dataset, baskets){
         posx = posx -step
         flag = false
       }else{
-        console.log(step)
+      //  console.log(step)
         step  += lenstept
       }
     }
     if(posx < 0){
       minX = Math.min(minX, posx)
     }
-    console.log(posx, posy)
+  //  console.log(posx, posy)
     elements.push({"radius":radius, "x":posx, "y":posy, "name":dataset[i][0]})
   }
   return elements
@@ -133,6 +134,8 @@ function generate(dataset, baskets){
 */
 
 function paint(nameDiv){
+  $("svg").remove()
+
   let ibody = d3.select("#"+nameDiv)
   let isvg = ibody.append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -235,7 +238,6 @@ class BlackHole {
   }
   plot(nameDiv, myhome, flag=true){
     // utilitary function
-    document.getElementById(nameDiv).innerHTML = ""
     const arrayColumn = (arr, n) => arr.map(x => x[n])
     home = myhome
     if(flag){
@@ -267,8 +269,8 @@ class BlackHole {
       })
     }else{
       let dataset = []
-      let basket = new Map()
       let data = this.file
+      let basket = new Map()
       for (let e in data) {
         let info = data[e]
         let name = info["name"]
@@ -286,6 +288,7 @@ class BlackHole {
       //  radius = 62//Math.min(yscale(15), parseInt(26*60/dataset.length))
      //  dataset = shuffleArray(dataset)
       elements = generate(dataset, basket)
+
       len =  elements.length
       iradios = arrayColumn(elements, "radius")
       paint(nameDiv)

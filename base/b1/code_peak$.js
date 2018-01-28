@@ -195,6 +195,7 @@ class Peak {
         dataset.push([name, value])
       }
       elements = generate(dataset)
+      console.log(elements)
       len = elements.length
       iradios = arrayColumn(elements, "radius")
       paint(nameDiv)

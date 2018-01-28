@@ -2,6 +2,7 @@ function printTable(file) {
   var reader = new FileReader();
   reader.readAsText(file);
   reader.onload = function(event){
+
     var csv = event.target.result;
     var data = $.csv.toArrays(csv);
     var html = '';
@@ -45,6 +46,8 @@ function selectFile(){
     mdata +=  '<br> type: '+icsv.type;
     mdata +=  '<br> size: '+icsv.size;
     document.getElementById("result1").innerHTML = mdata;
+    $( "#chart" ).remove();
+    $( "body" ).prepend("<div id='chart'></div>");
     printTable(icsv)
   }
 }
