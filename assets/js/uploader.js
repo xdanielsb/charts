@@ -16,8 +16,15 @@ function printTable(file) {
       }
       html += '</tr>\r';
     }
-    
-    let peak1 = new Peak(dataj)
+    let idx =   document.getElementById('cxd').value
+    let peak1;
+    if(idx==1){
+       peak1 = new Peak(dataj)
+    }else if(idx==2){
+       peak1 = new BlackHole(dataj)
+    }else if(idx==3){
+       peak1 = new Radial(dataj)
+    }
     let myHouse1 = 1
     document.getElementById('chart').innerHTML = ""
     peak1.plot("chart", myHouse1, false)
