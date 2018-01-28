@@ -10,6 +10,7 @@
    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script src="http://evanplaice.github.io/jquery-csv/src/jquery.csv.min.js"></script>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" />
+  <link rel="stylesheet" href="../../assets/css/table.css">
   <title>Chart 1</title>
   <style media="screen">
   .tittle{
@@ -20,40 +21,7 @@
     font-family: 'Open Sans',serif;
   }
   </style>
-  <script type="text/javascript">
-  function printTable(file) {
-    var reader = new FileReader();
-    reader.readAsText(file);
-    reader.onload = function(event){
-      var csv = event.target.result;
-      var data = $.csv.toArrays(csv);
-      var html = '';
-      for(var row in data) {
-        html += '<tr>\r\n';
-        for(var item in data[row]) {
-          html += '<td>' + data[row][item] + '</td>\r\n';
-        }
-        html += '</tr>\r\n';
-      }
-      $('#contents').html(html);
-    };
-    reader.onerror = function(){ alert('Unable to read ' + file.fileName); };
-  }
-
-    function selectFile(){
-      var icsv = document.getElementById('csv').files[0];
-      var  itype = "csv"
-      if (!icsv.type.includes(itype)) {
-        alert("Please select a csv file")
-      }else{
-        var mdata = 'Name File : '+ icsv.name;
-        mdata +=  '<br> type: '+icsv.type;
-        mdata +=  '<br> size: '+icsv.size;
-        document.getElementById("result1").innerHTML = mdata;
-        printTable(icsv)
-      }
-    }
-  </script>
+  <script type="text/javascript" src="../../assets/js/uploader.js"></script>
 </head>
 <body>
   <br>
@@ -63,21 +31,32 @@
   <div id="chart"></div>
 
   <center>
-    <br>
-    <h2>Upload the csv file that you want to visualize</h2>
-    <fieldset>
-      <legend> Choose the file </legend>
-      <form class="" action="index.html" method="post">
-        <input type="file" name="" value="" id="csv" onchange="selectFile()">
+    <div >
+      <div id="left">
         <br>
-        <div id="result1">
+        <h3>Upload the csv file that you want to visualize</h3>
+        <fieldset>
+          <legend> Choose the file </legend>
+          <form class="" action="index.html" method="post">
+            <input type="file" name="" value="" id="csv" onchange="selectFile()">
+            <br>
+            <div id="result1">
 
-        </div>
-      </form>
-    </fieldset>
+            </div>
+          </form>
+        </fieldset>
+      </div>
+      <div id="right">
+        <br>
+        <h3>Data</h3>
+        <fieldset>
+          <legend> Data that you upload</legend>
+          <table id="contents" > </table>
+        </fieldset>
+      </div>
+    </div>
 
   </center>
-<table id="contents" style="width:100%; height:400px;" border>
 
   <script>
     /* way one*/
