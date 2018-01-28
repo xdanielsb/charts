@@ -167,6 +167,7 @@ class Peak {
     this.file = file
   }
   plot(nameDiv, myhome, flag=true){
+    document.getElementById(nameDiv).innerHTML = ""
     home = myhome
     // utilitary function
     const arrayColumn = (arr, n) => arr.map(x => x[n])

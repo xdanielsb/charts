@@ -26,7 +26,6 @@ function printTable(file) {
        peak1 = new Radial(dataj)
     }
     let myHouse1 = 1
-    document.getElementById('chart').innerHTML = ""
     peak1.plot("chart", myHouse1, false)
 
     $('#contents').html(html);

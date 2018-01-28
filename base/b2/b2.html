@@ -7,6 +7,10 @@
   <meta name="author" content="Daniel Santos">
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="code_black$.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script src="http://evanplaice.github.io/jquery-csv/src/jquery.csv.min.js"></script>
+  <link rel="stylesheet" href="../../assets/css/table.css">
+  <script type="text/javascript" src="../../assets/js/uploader.js"></script>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" />
   <title>Chart 2</title>
   <style media="screen">
@@ -25,6 +29,35 @@
     <h2 class="tittle">Last month's energy usage per household</h2>
   </center>
   <div id="chart"></div>
+  <br>
+    <center>
+      <div >
+        <div id="left">
+          <br>
+          <h3>Upload the csv file that you want to visualize</h3>
+          <fieldset>
+            <legend> Choose the file </legend>
+            <form class="" action="index.html" method="post">
+              <input type="hidden" name="" value="2" id="cxd">
+              <input type="file" name="" value="" id="csv" onchange="selectFile()">
+              <br>
+              <div id="result1">
+
+              </div>
+            </form>
+          </fieldset>
+        </div>
+        <div id="right">
+          <br>
+          <h3>Data</h3>
+          <fieldset>
+            <legend> Data that you upload</legend>
+            <table id="contents" > </table>
+          </fieldset>
+        </div>
+      </div>
+    </center>
+
   <script>
 
     /* way one */

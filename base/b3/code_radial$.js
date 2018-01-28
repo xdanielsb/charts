@@ -306,6 +306,7 @@ class Radial {
   }
   plot(nameDiv, myhome,  flag=true){
     // utilitary function
+    document.getElementById(nameDiv).innerHTML = ""
     const arrayColumn = (arr, n) => arr.map(x => x[n])
     home = myhome
     if (flag) {
@@ -335,7 +336,8 @@ class Radial {
     }else{
       let dataset = []
       let basket = new Map()
-      for (let e in this.file) {
+      let data = this.file
+      for (let e in data) {
         let info = data[e]
         let name = info["name"]
         let value = parseInt(info["y"])
