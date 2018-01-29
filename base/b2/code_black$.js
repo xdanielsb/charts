@@ -134,8 +134,6 @@ function generate(dataset, baskets){
 */
 
 function paint(nameDiv){
-  $("svg").remove()
-
   let ibody = d3.select("#"+nameDiv)
   let isvg = ibody.append("svg")
     .attr("width", width + margin.left + margin.right)

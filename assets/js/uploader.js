@@ -46,8 +46,6 @@ function selectFile(){
     mdata +=  '<br> type: '+icsv.type;
     mdata +=  '<br> size: '+icsv.size;
     document.getElementById("result1").innerHTML = mdata;
-    $( "#chart" ).remove();
-    $( "body" ).prepend("<div id='chart'></div>");
     printTable(icsv)
   }
 }
