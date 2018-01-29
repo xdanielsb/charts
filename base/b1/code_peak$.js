@@ -73,7 +73,6 @@ function getColor(d, i) {
  Logic to generate the locations
 */
 function generate(dataset){
-  elements=[]
   let posx = 0
   let n = dataset.length
   let elements = []
