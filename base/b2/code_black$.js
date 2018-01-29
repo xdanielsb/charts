@@ -236,6 +236,7 @@ class BlackHole {
   }
   plot(nameDiv, myhome, flag=true){
     // utilitary function
+    document.getElementById(nameDiv).innerHTML = ""
     const arrayColumn = (arr, n) => arr.map(x => x[n])
     home = myhome
     if(flag){
