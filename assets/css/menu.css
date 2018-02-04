@@ -142,8 +142,8 @@
 }
  .content_shadow {
   width: 200px;
-  -webkit-box-shadow: 0px 31px 19px -2px #e0e8f9;
-          box-shadow: 0px 31px 19px -2px #e0e8f9;
+  -webkit-box-shadow: 0px 31px 19px -2px #a7aab1;
+          box-shadow: 0px 31px 19px -2px #a7aab1;
   height: 20px;
   border-radius: 70%;
   position: relative;
