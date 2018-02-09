@@ -175,7 +175,7 @@ function paint(nameDiv){
 
   var y_axis = d3.axisLeft()
     .scale(yscale)
-    .tickValues([500, 1000, 1500])
+    .tickValues([200, 900, 1500])
     .tickFormat(function (d) {
       if(d > 0 ) return d
     })
@@ -183,7 +183,7 @@ function paint(nameDiv){
 
 
   let bol = [
-      {id: 991,radio:1150},
+      {id: 991,radio:1190},
       {id: 992,radio:700},
       {id: 993,radio:144}
   ]
