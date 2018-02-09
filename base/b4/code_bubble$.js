@@ -43,8 +43,8 @@ let labelsLegends = [{
 
 let elements = []
 let iradios = []
-let radius = 55
-let radiusb = 17
+let radius = 42
+let radiusb = 13
 let delta = 0
 
 let xscale = d3.scaleLinear()
@@ -119,7 +119,7 @@ function generate(dataset, baskets){
     for (let j=0; j<elements.length && flag; j++){
       let auxCircle = elements[j]
       posy = auxCircle["y"]
-      posx = auxCircle["x"]+110
+      posx = auxCircle["x"]+radius*2
       for(let k=0; k<360 && flag; k+=1){
         let aux = rotate(posx,posy, k, auxCircle["x"],auxCircle["y"])
         if(!collide(elements, aux[0], aux[1])){

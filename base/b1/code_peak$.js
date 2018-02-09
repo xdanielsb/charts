@@ -53,8 +53,7 @@ let yscale = d3.scaleLinear()
 .range([height, 0]) //actual length of axis
 
 function getRadius(r) {
-  let res = 18.9 //(Maxradius / len) * 42 * (Maxradius / r)
-  //console.log(res)
+  let res = 13 
   return res
 }
 function getX(e, r) {

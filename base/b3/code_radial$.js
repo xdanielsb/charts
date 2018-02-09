@@ -67,7 +67,7 @@ function getY(e, r) {
  return yscale(elements[r-3]["y"])
 }
 function getRadius(r) {
-  //console.log("real ",r, "new ", yscale(r))
+
   return rscale(r) *2
 }
 function getColor(d, i) {
@@ -328,7 +328,7 @@ class Radial {
             }
           }
         }
-        radius =  30 // Math.min(30, parseInt(26*30/dataset.length))
+        radius =  29 // Math.min(30, parseInt(26*30/dataset.length))
         elements = generate(dataset, basket)
         len =  elements.length
         iradios = arrayColumn(elements, "radius")

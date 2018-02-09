@@ -43,8 +43,8 @@ let labelsLegends = [{
 
 let elements = []
 let iradios = []
-let radius = 55
-let radiusb = 17
+let radius = 42
+let radiusb = 13
 let delta = 0
 
 let xscale = d3.scaleLinear()
@@ -56,6 +56,7 @@ let yscale = d3.scaleLinear()
  .range([height, 0]) //actual length of axis
 
 function getRadius(r) {
+  
  return radiusb
 }
 function getX(e, r) {
