@@ -43,7 +43,7 @@ let labelsLegends = [{
 
 let elements = []
 let iradios = []
-let radius = 42
+let radius = 37
 let radiusb = 13
 let delta = 0
 
@@ -179,6 +179,7 @@ function paint(nameDiv){
     .attr("cy", getY)
     .attr("r", getRadius)
     .style("fill", getColor)
+    .style('stroke', "black");
 
   let legend = isvg.selectAll('.legend')
     .data(labelsLegends)

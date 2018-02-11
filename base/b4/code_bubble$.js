@@ -66,6 +66,10 @@ function getY(e, r) {
  //  let res = (maxValue - elements[r][1] ) /(maxValue/height) + y0
  return yscale(elements[r]["y"]) + y0
 }
+
+function getValue(e, r) {
+  return e
+ }
 function getColor(d, i) {
 //  console.log()
  if (elements[i]["name"] == "House"+home) return customColors[0]
@@ -153,7 +157,6 @@ function paint(nameDiv){
       .scale(yscale)
       .ticks(0)
 
-
   let icircles = isvg.selectAll("circle")
     .data(iradios)
     .enter()
@@ -175,6 +178,7 @@ function paint(nameDiv){
     .attr("cy", getY)
     .attr("r", getRadius)
     .style("fill", getColor)
+
 
   let legend = isvg.selectAll('.legend')
     .data(labelsLegends)
