@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="author" content="Daniel Santos">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="code_black$.2.js"></script>
+  <script type="text/javascript" src="../../assets/js/jquery.min.js"></script>
+  <script type="text/javascript" src="../../assets/js/jquery.csv.min.js"></script>
+  <script type="text/javascript" src="../../assets/js/uploader.js"></script>
+  <link rel="stylesheet" href="../../assets/css/table.css">
+  <script type="text/javascript" src="../../assets/js/uploader.js"></script>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" />
+  <title>Chart 2</title>
+  <style media="screen">
+  .tittle{
+    font-family: 'Open Sans',serif;
+  }
+  .legend {
+    font-size: : 12px;
+    font-family: 'Open Sans',serif;
+  }
+  </style>
+</head>
+<body>
+  <br>
+  <center>
+    <h2 class="tittle">Last month's energy usage per household</h2>
+  </center>
+  <div id="chart"></div>
+  <br>
+    <center>
+      <div >
+        <div id="left">
+          <br>
+          <h3>Upload the csv file that you want to visualize</h3>
+          <fieldset>
+            <legend> Choose the file </legend>
+            <form class="" action="index.html" method="post">
+              <input type="hidden" name="" value="2" id="cxd">
+              <input type="file" name="" value="" id="csv" onchange="selectFile()">
+              <br>
+              <div id="result1">
+
+              </div>
+            </form>
+          </fieldset>
+        </div>
+        <div id="right">
+          <br>
+          <h3>Data</h3>
+          <fieldset>
+            <legend> Data that you upload</legend>
+            <table id="contents" > </table>
+          </fieldset>
+        </div>
+      </div>
+    </center>
+
+  <script>
+
+    /* way one */
+    let bh = new BlackHole("../data3.csv")
+    let myHouse = 1
+    bh.plot("chart", myHouse)
+    
+    /*Way two*/
+    /*let data  = [
+      {name:"House1",y:600},
+      {name:"House2",y:750},
+      {name:"House3",y:800},
+      {name:"House4",y:900},
+      {name:"House5",y:1000},
+      {name:"House6",y:900},
+      {name:"House7",y:700},
+      {name:"House8",y:900},
+      {name:"House9",y:800},
+      {name:"House10",y:1000},
+      {name:"House11",y:700},
+      {name:"House12",y:600}
+    ]
+    let bh = new BlackHole(data)
+    let myHouse = 15
+    bh.plot("chart", myHouse, false)*/
+
+  </script>
+</body>
+</html>
