@@ -71,7 +71,6 @@ function getValue(e, r) {
   return e
  }
 function getColor(d, i) {
-//  console.log()
  if (elements[i]["name"] == "House"+home) return customColors[0]
  return customColors[1]
 }
@@ -97,6 +96,15 @@ function collide(circles, x, y){
   return false
 }
 
+function sortFunction(a,b){
+  if (a[1] === b[1]) {
+    return 0;
+  }
+  return (a[1] < b[1]) ? -1 : 1;
+}
+
+
+
 
 /*
   Function to rotate a point(nx,ny) a grades
@@ -116,7 +124,8 @@ function generate(dataset, baskets){
   elements = []
   let cont = 0, posx =0, posy =0
   let n = dataset.length
-  elements.push({"radius":radius, "x":maxValue/2-200, "y":maxValue/2, "name":dataset[0][0]})
+  console.log(dataset)
+  elements.push({"radius":radius, "x":maxValue/2-200, "y":maxValue/2, "name":dataset[0][0],  "value":dataset[0][1]})
   for( let i=1; i<n ; ++i){
     let step = 0
     let flag = true
@@ -127,13 +136,12 @@ function generate(dataset, baskets){
       for(let k=0; k<360 && flag; k+=1){
         let aux = rotate(posx,posy, k, auxCircle["x"],auxCircle["y"])
         if(!collide(elements, aux[0], aux[1])){
-          elements.push({"radius":radius, "x":aux[0], "y":aux[1], "name":dataset[i][0]})
+          elements.push({"radius":radius, "x":aux[0], "y":aux[1], "name":dataset[i][0], "value":dataset[i][1]})
           flag = false
         }
       }
     }
   }
-  console.log(elements)
   return elements
 }
 
@@ -153,14 +161,15 @@ function paint(nameDiv){
     .scale(xscale)
     .ticks(0)
 
-    let y_axis = d3.axisLeft()
+  let y_axis = d3.axisLeft()
       .scale(yscale)
       .ticks(0)
 
-  let icircles = isvg.selectAll("circle")
+
+  let icircles = isvg.selectAll("g")
     .data(iradios)
     .enter()
-    .append("circle")
+    .append("g")
 
   isvg.append("g")
     .attr("transform", "translate(" + x0 + ", " + y0 + ")")
@@ -171,14 +180,12 @@ function paint(nameDiv){
     .style("stroke-dasharray", ("10, 10"))
     .call(x_axis)
 
-
   //Add atributtes circles
-  let iattr = icircles
+  let iattr = icircles.append("circle")
     .attr("cx", getX)
     .attr("cy", getY)
     .attr("r", getRadius)
     .style("fill", getColor)
-
 
   let legend = isvg.selectAll('.legend')
     .data(labelsLegends)
@@ -206,6 +213,24 @@ function paint(nameDiv){
       .text(function (d) {
         return d.label;
       });
+
+    
+      icircles.append("text")
+      .attr("x", function(d,i){
+       return getX(1, i)
+      })
+      .attr("y", function(d,i){
+       return getY(1, i)
+      })
+      .attr("alignment-baseline", "middle")
+      .attr("text-anchor", "middle")
+      .style("font-size", "12px")
+      .text(function(d,i){
+        let txt = elements[i]["value"]
+        return txt
+      })
+      
+  
 }
 
 
@@ -238,6 +263,7 @@ class Bubble {
             }
           }
         }
+        dataset.sort(sortFunction)
         elements = generate(dataset, basket)
         len =  elements.length
         iradios = arrayColumn(elements, "radius")
@@ -263,8 +289,8 @@ class Bubble {
       }
       //  radius = 62//Math.min(yscale(15), parseInt(26*60/dataset.length))
      //  dataset = shuffleArray(dataset)
+     dataset.sort(sortFunction)
       elements = generate(dataset, basket)
-
       len =  elements.length
       iradios = arrayColumn(elements, "radius")
       paint(nameDiv)

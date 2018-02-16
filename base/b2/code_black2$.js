@@ -8,8 +8,8 @@
 /*
  @Constants: Setup variable
 */
-let height = 350
-let width = 450 // restriction for being circles
+let height = 450
+let width = 270 // restriction for being circles
 let len = 0
 let x0 = 65
 let y0 = 20
