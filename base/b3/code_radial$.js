@@ -219,7 +219,17 @@ function paint(nameDiv){
     .attr("cx", getX)
     .attr("cy", getY)
     .attr("r", getRadius)
+    .attr("opacity", 0) // ADV : All circles must be hidden at the start
     .style("fill", getColor)
+
+  // ADV: Getting references to all circles within the graph (I called them dots)
+  let dots = isvg.selectAll("circle")
+  // ADV: creating the transition, plain, all cicles fadein at the same time.
+  dots.transition()
+    .delay(500)
+    .duration(1000)
+    .attr("opacity", 1)
+  
 
   let arrows = [0,1,2,3,4,5,6,7]
   let arrowsy1 = [22, 22, 117, 117,230, 230, width/2, width/2]
