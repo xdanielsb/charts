@@ -181,11 +181,11 @@ function paint(nameDiv){
     })
     .tickPadding(5)
 
-
+  //ADV: IDs on D3.js can't start with numbers, actually, the best option is not put numbers at all
   let bol = [
-      {id: 991,radio:1190},
-      {id: 992,radio:700},
-      {id: 993,radio:144}
+      {id: "bigCircle",radio:1190},
+      {id: "middleCircle",radio:700},
+      {id: "innerCircle",radio:144}
   ]
 
 
@@ -201,16 +201,25 @@ function paint(nameDiv){
     .attr("r", function (d) {
       return rscale(d.radio);
     })
+    .attr("id", function(d){
+      return d.id;
+    })
     .style("stroke", "black")
     .style("fill",function(d){
-      if(d.id == 993) return "#AAAAAA";
-      if(d.id  == 992) return "#D9D9D9";
-      if(d.id  == 991) return "#F2F2F2";
+      if(d.id == "bigCircle") return "#AAAAAA";
+      if(d.id  == "middleCircle") return "#D9D9D9";
+      if(d.id  == "innerCircle") return "#F2F2F2";
     });
+
 
   iradios.unshift(0)
   iradios.unshift(0)
   iradios.unshift(0)
+
+  let backgroundCircles = []
+        backgroundCircles.push( d3.select("#bigCircle"))
+        backgroundCircles.push( d3.select("#middleCircle"))
+        backgroundCircles.push( d3.select("#innerCircle"))
 
   isvg.selectAll("circle")
     .data(iradios)
@@ -219,8 +228,45 @@ function paint(nameDiv){
     .attr("cx", getX)
     .attr("cy", getY)
     .attr("r", getRadius)
+    .attr("opacity", 0) // ADV : All circles must be hidden at the start
+    .attr("id", function(d, i){
+      console.log(this)
+      console.log("dot" + i)
+
+      return "dot" + i
+    })
     .style("fill", getColor)
 
+  // ADV: Getting references to all circles within the graph (I called them dots)
+  let dots = isvg.selectAll("circle")
+  // ADV: creating the transition, plain, all cicles fadein at the same time.
+  dots.transition()
+    .delay(function(d, i){
+      if(i == home){
+        return 200; //Showing home dot first
+      }else{
+        //ADV: Getting the center of all the circles
+        let element = backgroundCircles[1].node();
+        let bbox = element.getBBox()
+        let centerMiddleCircle = [bbox.x + bbox.width/2, bbox.y + bbox.height/2]
+
+        let circleBbox = this.getBBox();
+        let centerDot = [circleBbox.x + circleBbox.width/2, circleBbox.y + circleBbox.height/2] //current circle center
+        //ADV: Calculating distance
+        let distance = Math.sqrt((Math.pow(centerDot[0]-centerMiddleCircle[0],2))+(Math.pow(centerDot[1]-centerMiddleCircle[1],2)))
+
+        if (distance < bbox.width/2){
+          //ADV: The dot is within the middle circle, should appear first
+          return 700
+        }else {
+          return 1200
+        }
+      }
+    })
+    .duration(800)
+    .attr("opacity", 1)
+  
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
   let arrows = [0,1,2,3,4,5,6,7]
   let arrowsy1 = [22, 22, 117, 117,230, 230, width/2, width/2]
   let iarrows = isvg.selectAll("line")
