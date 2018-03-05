@@ -206,7 +206,7 @@ function paint(nameDiv){
     })
     .style("stroke", "black")
     .style("fill",function(d){
-      if(d.id == "bigCircle") return "black";
+      if(d.id == "bigCircle") return "#F2F2F2";
       if(d.id  == "middleCircle") return "#D9D9D9";
       if(d.id  == "innerCircle") return "#F2F2F2";
     });
