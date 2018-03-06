@@ -174,7 +174,7 @@ function generate(dataset, baskets){
   }
   The function returns an array of up to two point on the line segment. If no points found returns an empty array.
 /*/
-function inteceptCircleLineSeg(circle, line){
+/*function inteceptCircleLineSeg(circle, line){
     var a, b, c, d, u1, u2, ret, retP1, retP2, v1, v2;
     v1 = {};
     v2 = {};
@@ -208,7 +208,7 @@ function inteceptCircleLineSeg(circle, line){
         ret[ret.length] = retP2;
     }       
     return ret;
-}
+}*/
 
 function sum(la, le ){
   return la + le
@@ -289,9 +289,7 @@ function paint(nameDiv){
     .attr("r", getRadius)
     .attr("opacity", 0) // ADV : All circles must be hidden at the start
     .attr("id", function(d, i){
-      console.log(this)
-      console.log("dot" + i)
-
+//      console.log(this)
       return "dot" + i
     })
     .style("fill", getColor)
@@ -330,16 +328,28 @@ function paint(nameDiv){
     .delay(1500)
     .duration(1000)
     .attr("transform", function(d, i){
-      if(!(i == 0 || i == 1 || i == 2)){
-        if( i == home){
-        //This dote will not be animated.
-        }else{
-          // You can do all your coding here
-          return "translate(250, 250)"
+      if(  !(i == 0 || i == 1 || i == 2) ){
+        if( elements[i]!=undefined   ){
+          let _x =  getX(d, i)  - width / 2;
+          let _y =  getY(d, i)  - height /2;
+          let _str=""
+          console.log(i)
+          if( _x >=0 && _y >=0){
+            _str =   "translate(10, 10)"
+          }else if ( _x <= 0 && _y >=0){
+            _str =   "translate(-10, +10)"
+          }else if ( _x < 0 && _y <0){
+            _str =   "translate(-10, -10)"
+          }else if ( _x >=0 && _y <=0){
+            _str =   "translate(10, -10)"
+          }
+
+          return _str
           }
         }
     })
-
+    .attr("opacity", 1)
+    
 
   
 ///////////////////////////////////////////////////////////////////////////////////////////////////////// ADV - end
