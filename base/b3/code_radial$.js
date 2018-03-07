@@ -239,63 +239,113 @@ function paint(nameDiv){
     })
     .style("fill", getColor)
 
+
+
   let dots = isvg.selectAll("circle")
+
+   //moving all the dots 
+   dots.transition()
+   .delay(0)
+   .duration(0)
+   .attr("transform", function(d, i){
+     if(  i >= 3 ){
+       if( elements[i-numBigCircles] != undefined   ){
+         let _str=""
+         let val = 10
+         let x = elements[i-numBigCircles]["x"]
+         let y = elements[i-numBigCircles]["y"]
+         let distance = elements[i-numBigCircles]["real"]
+         let the = Math.atan2(y, x) * 180 / Math.PI;
+         if(the < 0 ) the += 360
+         if(distance > 700){
+           if(the <=90){
+             _str =   "translate("+val+", -"+val+")" // up right
+           }else if( the <= 180){
+             _str =   "translate(-"+val+", -"+val+")" // up left
+           }else if( the <= 270){
+             _str =   "translate(-"+val+", +"+val+")" // down left
+           }else {
+             _str =   "translate("+val+", "+val+")" //down - right
+           }
+         }else {
+           if(the <=90){
+             _str =   "translate(-"+val+", +"+val+")" // down left
+           }else if( the <= 180){
+             _str =   "translate("+val+", "+val+")" //down - right
+           }else if( the <= 270){
+             _str =   "translate("+val+", -"+val+")" // up right
+           }else {
+             _str =   "translate(-"+val+", -"+val+")" // up left
+           }
+         }
+         return _str
+         }
+         
+       }
+   })
+   .attr("opacity", function(d,i){
+     if(i <= 2 ) return "1"
+     return "0"
+   })
+
+
   dots.transition()
     .delay(function(d, i){
       if(i == home) return 200; 
       if(i >= 3 ) {
         let distance = elements[i-numBigCircles]["real"]
         if(distance <= 700) return 700
-        return 2000
+        return 1400
       }
     })
-    .duration(0)
-    .attr("opacity", 1)
-
-    //moving all the dots 
-  dots.transition()
-    .delay(1500)
     .duration(1000)
-    .attr("transform", function(d, i){
-      if(  i >= 3 ){
-        if( elements[i-numBigCircles] != undefined   ){
-          let _str=""
-          let x = elements[i-numBigCircles]["x"]
-          let y = elements[i-numBigCircles]["y"]
-          let distance = elements[i-numBigCircles]["real"]
-          
-          let the = Math.atan2(y, x) * 180 / Math.PI;
-          if(the < 0 ) the += 360
-
-          if(the <=90){
-            _str =   "translate(10, -10)" // up right
-          }else if( the <= 180){
-            _str =   "translate(-10, -10)" // up left
-          }else if( the <= 270){
-            _str =   "translate(-10, +10)" // down left
-          }else {
-            _str =   "translate(10, 10)" //down - right
-          }
-
-       /*   let _x =  getX(d, i)  - width / 2;
-          let _y =  getY(d, i)  - height /2;
-          
-          if( _x >=0 && _y >=0){
-            _str =   "translate(10, 10)"
-          }else if ( _x <= 0 && _y >=0){
-            _str =   "translate(-10, +10)"
-          }else if ( _x < 0 && _y <0){
-            _str =   "translate(-10, -10)"
-          }else if ( _x >=0 && _y <=0){
-            _str =   "translate(10, -10)"
-          }*/
-
-          return _str
-          }
-          
-        }
-    })
     .attr("opacity", 1)
+
+   
+
+
+
+        //moving all the dots 
+  dots.transition()
+  .delay(2000)
+  .duration(5000)
+  .attr("transform", function(d, i){
+    if(  i >= 3 ){
+      if( elements[i-numBigCircles] != undefined   ){
+        let _str=""
+        let val = 10
+        let x = elements[i-numBigCircles]["x"]
+        let y = elements[i-numBigCircles]["y"]
+        let distance = elements[i-numBigCircles]["real"]
+        let the = Math.atan2(y, x) * 180 / Math.PI;
+        if(the < 0 ) the += 360
+        if(distance <= 700){
+          if(the <=90){
+            _str =   "translate("+val+", -"+val+")" // up right
+          }else if( the <= 180){
+            _str =   "translate(-"+val+", -"+val+")" // up left
+          }else if( the <= 270){
+            _str =   "translate(-"+val+", +"+val+")" // down left
+          }else {
+            _str =   "translate("+val+", "+val+")" //down - right
+          }
+        }else {
+          if(the <=90){
+            _str =   "translate(-"+val+", +"+val+")" // down left
+          }else if( the <= 180){
+            _str =   "translate("+val+", "+val+")" //down - right
+          }else if( the <= 270){
+            _str =   "translate("+val+", -"+val+")" // up right
+          }else {
+            _str =   "translate(-"+val+", -"+val+")" // up left
+          }
+        }
+        return _str
+        }
+        
+      }
+  })
+  .attr("opacity", 1)
     
 
   
