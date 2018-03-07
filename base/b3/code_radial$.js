@@ -184,8 +184,6 @@ function paint(nameDiv){
       if(d > 0 ) return d
     })
     .tickPadding(5)
-
-  //ADV: IDs on D3.js can't start with numbers, actually, the best option is not put numbers at all
   let bol = [
       {id: "bigCircle",radio:1190},
       {id: "middleCircle",radio:700},
@@ -301,11 +299,6 @@ function paint(nameDiv){
     .duration(1000)
     .attr("opacity", 1)
 
-   
-
-
-
-        //moving all the dots 
   dots.transition()
   .delay(2000)
   .duration(7000)
@@ -347,9 +340,6 @@ function paint(nameDiv){
   })
   .attr("opacity", 1)
     
-
-  
-///////////////////////////////////////////////////////////////////////////////////////////////////////// ADV - end
   let arrows = [0,1,2,3,4,5,6,7]
   let arrowsy1 = [22, 22, 117, 117,230, 230, width/2, width/2]
   let iarrows = isvg.selectAll("line")
