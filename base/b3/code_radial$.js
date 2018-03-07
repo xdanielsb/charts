@@ -8,7 +8,7 @@
 /*
  @Constants: Setup variable
 */
-let height = 500
+let height = 450
 let width = height // restriction for being circles
 let Maxradius = 15
 let len = 0
