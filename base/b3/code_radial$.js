@@ -8,7 +8,7 @@
 /*
  @Constants: Setup variable
 */
-let height = 520
+let height = 500
 let width = height // restriction for being circles
 let Maxradius = 15
 let len = 0
@@ -32,8 +32,9 @@ let legendRectSize = 18
 let legendSpacing = 4
 let color = d3.scaleOrdinal(d3.schemeCategory20b);
 let customColors = [
-  "#A6A6A6",
-  "#595959"
+  "#E57F21", //home
+  "#B2C56E", //less than 700
+  "#FFDCBE"
 ]
 let labelsLegends = [{
    label: 'Your household'
@@ -76,7 +77,13 @@ function getRadius(r) {
 }
 function getColor(d, i) {
  if (i == home) return customColors[0]
- return customColors[1]
+ let distance = elements[i-numBigCircles]["real"]
+  if(distance <= 700) {
+    return  customColors[1]
+  }else{
+    return customColors[2]
+  }
+
 }
 
 /*
@@ -352,7 +359,7 @@ function paint(nameDiv){
       if(i%2==0)return "gray"
       return "gray"
     })
-    .style("stroke-width", "1")
+    .style("stroke-width", "3")
     .style("stroke", "black")  // colour the line
     .attr("x1", width/2)
     .attr("y1",  function(d,i){
