@@ -155,61 +155,6 @@ function generate(dataset, baskets){
   return elements
 }
 
-/*/ 
-  ADV: Function to find the interception between a line and a circle.
-    A circle is:
-  var circle = {
-    radius : 500,
-    center : point(1000,1000),
-  }
-    A Line is:
-  var line = {
-    p1 : point(500,500),
-    p2 : point(2000,1000),
-  }
-    A point is:
-  var Point = {
-    x : 100,
-    y : 100,
-  }
-  The function returns an array of up to two point on the line segment. If no points found returns an empty array.
-/*/
-/*function inteceptCircleLineSeg(circle, line){
-    var a, b, c, d, u1, u2, ret, retP1, retP2, v1, v2;
-    v1 = {};
-    v2 = {};
-    v1.x = line.p2.x - line.p1.x;
-    v1.y = line.p2.y - line.p1.y;
-    v2.x = line.p1.x - circle.center.x;
-    v2.y = line.p1.y - circle.center.y;
-    b = (v1.x * v2.x + v1.y * v2.y);
-    c = 2 * (v1.x * v1.x + v1.y * v1.y);
-    b *= -2;
-    d = Math.sqrt(b * b - 2 * c * (v2.x * v2.x + v2.y * v2.y - circle.radius * circle.radius));
-    if(isNaN(d)){ // no intercept
-        console.log(":(")
-        return [];
-    }
-    u1 = (b - d) / c;  // these represent the unit distance of point one and two on the line
-    u2 = (b + d) / c;    
-    retP1 = {};   // return points
-    retP2 = {}  
-    ret = []; // return array
-    if(u1 <= 1 && u1 >= 0){  // add point if on the line segment
-        console.log(":D")
-        retP1.x = line.p1.x + v1.x * u1;
-        retP1.y = line.p1.y + v1.y * u1;
-        ret[0] = retP1;
-    }
-    if(u2 <= 1 && u2 >= 0){  // second add point if on the line segment
-        console.log(":O")
-        retP2.x = line.p1.x + v1.x * u2;
-        retP2.y = line.p1.y + v1.y * u2;
-        ret[ret.length] = retP2;
-    }       
-    return ret;
-}*/
-
 function sum(la, le ){
   return la + le
 }
@@ -217,7 +162,6 @@ function sum(la, le ){
 /*
   Paint the circles
 */
-
 function paint(nameDiv){
 
   let ibody = d3.select("#chart")
