@@ -23,6 +23,7 @@ let margin = {
  bottom: 40,
  left: 360
 };
+let numBigCircles = 3;
 
 /*
  @Constants for legends
@@ -61,10 +62,13 @@ let rscale = d3.scaleLinear()
   .range([0, height]);
 
 function getX(e, r) {
- return xscale(elements[r-3]["x"])
+ return xscale(elements[r-numBigCircles ]["x"])
 }
 function getY(e, r) {
- return yscale(elements[r-3]["y"])
+ return yscale(elements[r-numBigCircles ]["y"])
+}
+function getValue(e,r){
+  return yscale(elements[r-numBigCircles ]["real"])
 }
 function getRadius(r) {
 
@@ -132,7 +136,6 @@ function generate(dataset, baskets){
     let ok = true;
     while(collide(elements, posx, posy)){
       times += 1
-    //  console.log("wtf")
       t = parseInt(t)%360
       t += angle
       if(times>=(360/angle)){
@@ -142,13 +145,11 @@ function generate(dataset, baskets){
       aux = rotate(posx,posy, t)
       posx = aux[0], posy = aux[1]
       if(angle < 1) {
-  //      console.log("super tired")
-      //  ok = false;
         break
       }
     }
     if(ok){
-      elements.push({"radius":radius, "x":posx, "y":posy, "name":dataset[i][0]})
+      elements.push({"radius":radius, "x":posx, "y":posy, "name":dataset[i][0], "real":dataset[i][1]})
       baskets.set(bask,[ count+1,  many+1])
     }
   }
@@ -219,6 +220,7 @@ function paint(nameDiv){
   iradios.unshift(0)
   iradios.unshift(0)
 
+
   let backgroundCircles = []
         backgroundCircles.push( d3.select("#bigCircle"))
         backgroundCircles.push( d3.select("#middleCircle"))
@@ -233,35 +235,19 @@ function paint(nameDiv){
     .attr("r", getRadius)
     .attr("opacity", 0) // ADV : All circles must be hidden at the start
     .attr("id", function(d, i){
-//      console.log(this)
       return "dot" + i
     })
     .style("fill", getColor)
-///////////////////////////////////////////////////////////////////////////////////////////////////////// ADV - start
 
-  // ADV: Getting references to all circles within the graph (I called them dots)
   let dots = isvg.selectAll("circle")
   dots.transition()
     .delay(function(d, i){
       if(i == home){
-        return 200; //Showing home dot first
-      }else{
-        //ADV: Getting the center of all the circles
-        let element = backgroundCircles[1].node();
-        let bbox = element.getBBox()
-        let centerMiddleCircle = [bbox.x + bbox.width/2, bbox.y + bbox.height/2]
-
-        let circleBbox = this.getBBox();
-        let centerDot = [circleBbox.x + circleBbox.width/2, circleBbox.y + circleBbox.height/2] //current circle center
-        //ADV: Calculating distance
-        let distance = Math.sqrt((Math.pow(centerDot[0]-centerMiddleCircle[0],2))+(Math.pow(centerDot[1]-centerMiddleCircle[1],2)))
-
-        if (distance < bbox.width/2){
-          //ADV: The dot is within the middle circle, should appear first
-          return 700
-        }else {
-          return 1200
-        }
+        return 200; 
+      }else if(i >= 3 ) {
+        let distance = elements[i-numBigCircles]["real"]
+        if(distance <= 700) return 700
+        return 2000
       }
     })
     .duration(800)
@@ -272,9 +258,9 @@ function paint(nameDiv){
     .delay(1500)
     .duration(1000)
     .attr("transform", function(d, i){
-      if(  !(i == 0 || i == 1 || i == 2) ){
+      if(  i >= 3 ){
         if( elements[i]!=undefined   ){
-          let _x =  getX(d, i)  - width / 2;
+       /*   let _x =  getX(d, i)  - width / 2;
           let _y =  getY(d, i)  - height /2;
           let _str=""
           console.log(i)
@@ -287,8 +273,7 @@ function paint(nameDiv){
           }else if ( _x >=0 && _y <=0){
             _str =   "translate(10, -10)"
           }
-
-          return _str
+          return _str*/
           }
         }
     })
