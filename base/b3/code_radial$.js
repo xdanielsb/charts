@@ -306,13 +306,13 @@ function paint(nameDiv){
     if(  i >= 3 ){
       if( elements[i-numBigCircles] != undefined   ){
         let _str=""
-        let val = -10
+        let val = 10
         let x = elements[i-numBigCircles]["x"]
         let y = elements[i-numBigCircles]["y"]
         let distance = elements[i-numBigCircles]["real"]
         let the = Math.atan2(y, x) * 180 / Math.PI;
         if(the < 0 ) the += 360
-        if(distance > 700){
+        if(distance <= 700){
           if(the <=90){
             _str =   "translate("+val+", -"+val+")" // up right
           }else if( the <= 180){
