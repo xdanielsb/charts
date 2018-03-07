@@ -34,7 +34,7 @@ let color = d3.scaleOrdinal(d3.schemeCategory20b);
 let customColors = [
   "#E57F21", //home
   "#B2C56E", //less than 700
-  "#FFDCBE"
+  "#FAC392"
 ]
 let labelsLegends = [{
    label: 'Your household'
@@ -256,7 +256,7 @@ function paint(nameDiv){
      if(  i >= 3 ){
        if( elements[i-numBigCircles] != undefined   ){
          let _str=""
-         let val = 10
+         let val = 20
          let x = elements[i-numBigCircles]["x"]
          let y = elements[i-numBigCircles]["y"]
          let distance = elements[i-numBigCircles]["real"]
