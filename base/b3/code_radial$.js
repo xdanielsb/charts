@@ -242,15 +242,14 @@ function paint(nameDiv){
   let dots = isvg.selectAll("circle")
   dots.transition()
     .delay(function(d, i){
-      if(i == home){
-        return 200; 
-      }else if(i >= 3 ) {
+      if(i == home) return 200; 
+      if(i >= 3 ) {
         let distance = elements[i-numBigCircles]["real"]
         if(distance <= 700) return 700
         return 2000
       }
     })
-    .duration(800)
+    .duration(0)
     .attr("opacity", 1)
 
     //moving all the dots 
@@ -259,11 +258,28 @@ function paint(nameDiv){
     .duration(1000)
     .attr("transform", function(d, i){
       if(  i >= 3 ){
-        if( elements[i]!=undefined   ){
+        if( elements[i-numBigCircles] != undefined   ){
+          let _str=""
+          let x = elements[i-numBigCircles]["x"]
+          let y = elements[i-numBigCircles]["y"]
+          let distance = elements[i-numBigCircles]["real"]
+          
+          let the = Math.atan2(y, x) * 180 / Math.PI;
+          if(the < 0 ) the += 360
+
+          if(the <=90){
+            _str =   "translate(10, -10)" // up right
+          }else if( the <= 180){
+            _str =   "translate(-10, -10)" // up left
+          }else if( the <= 270){
+            _str =   "translate(-10, +10)" // down left
+          }else {
+            _str =   "translate(10, 10)" //down - right
+          }
+
        /*   let _x =  getX(d, i)  - width / 2;
           let _y =  getY(d, i)  - height /2;
-          let _str=""
-          console.log(i)
+          
           if( _x >=0 && _y >=0){
             _str =   "translate(10, 10)"
           }else if ( _x <= 0 && _y >=0){
@@ -272,9 +288,11 @@ function paint(nameDiv){
             _str =   "translate(-10, -10)"
           }else if ( _x >=0 && _y <=0){
             _str =   "translate(10, -10)"
+          }*/
+
+          return _str
           }
-          return _str*/
-          }
+          
         }
     })
     .attr("opacity", 1)
