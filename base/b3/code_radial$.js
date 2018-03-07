@@ -308,7 +308,7 @@ function paint(nameDiv){
 
   dots.transition()
   .delay(2000)
-  .duration(7000)
+  .duration(1000)
   .attr("transform", function(d, i){
     if(  i >= 3 ){
       if( elements[i-numBigCircles] != undefined   ){
