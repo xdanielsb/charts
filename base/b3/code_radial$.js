@@ -133,7 +133,7 @@ function generate(dataset, baskets){
     let bask = getBask(dataset[i][1])
     let many =  baskets.get(bask)[1]
     let count = baskets.get(bask)[0]
-    let rand = Math.floor((Math.random() * 90) + 0);
+    let rand = 10; //Math.floor((Math.random() * 90) + 0);
     let angle = 90 +rand
 
     let aux = rotate(posx, posy, t)
@@ -397,6 +397,7 @@ function paint(nameDiv){
     .text("kWh / Month");
 
 
+    /* If you want legends uncomment this block
   let legend = isvg.selectAll('.legend')
     .data(labelsLegends)
     .enter()
@@ -422,7 +423,7 @@ function paint(nameDiv){
       .attr('y', legendRectSize - legendSpacing -8)
       .text(function (d) {
         return d.label;
-      });
+      }); */
 
 }
 
