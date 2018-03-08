@@ -85,15 +85,17 @@ peak.plot("chart", myHouse, false)
 Contributors
 ------------
 
-#### Designers
-* Marlen Promann |  marlen.promann@gmail.com | [Github](https://github.com/promann)
+####  Sketch Artist 
+* Marlen Promann |  marlen.promann@gmail.com | [Github](https://github.com/promann) | Create the sketch of the visualizations 1, 2 and 3
 
-* Sabine Brunswicker |  sabine.brunswicker@gmail.com | [Github](https://github.com/sbrunswi)
+### Advisor
+* Sabine Brunswicker |  sabine.brunswicker@gmail.com | [Github](https://github.com/sbrunswi) | Advise in possible ways to improve the game
 
 #### Developer
 * Name : Daniel Santos
 * Email : dfsantosbu@unal.edu.co
 * Github : [XDanielsb](https://github.com/xdanielsb)
+* Program and design the visualizations
 
 ### License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
