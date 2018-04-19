@@ -8,7 +8,7 @@
 /*
  @Constants: Setup variable
 */
-let height = 450
+let height = 520
 let width = height // restriction for being circles
 let Maxradius = 15
 let len = 0
@@ -23,7 +23,6 @@ let margin = {
  bottom: 40,
  left: 360
 };
-let numBigCircles = 3;
 
 /*
  @Constants for legends
@@ -32,9 +31,8 @@ let legendRectSize = 18
 let legendSpacing = 4
 let color = d3.scaleOrdinal(d3.schemeCategory20b);
 let customColors = [
-  "#E57F21", //home
-  "#B2C56E", //less than 700
-  "#FAC392"
+  "#A6A6A6",
+  "#595959"
 ]
 let labelsLegends = [{
    label: 'Your household'
@@ -63,27 +61,18 @@ let rscale = d3.scaleLinear()
   .range([0, height]);
 
 function getX(e, r) {
- return xscale(elements[r-numBigCircles ]["x"])
+ return xscale(elements[r-3]["x"])
 }
 function getY(e, r) {
- return yscale(elements[r-numBigCircles ]["y"])
-}
-function getValue(e,r){
-  return yscale(elements[r-numBigCircles ]["real"])
+ return yscale(elements[r-3]["y"])
 }
 function getRadius(r) {
-
+  //console.log("real ",r, "new ", yscale(r))
   return rscale(r) *2
 }
 function getColor(d, i) {
  if (i == home) return customColors[0]
- let distance = elements[i-numBigCircles]["real"]
-  if(distance <= 700) {
-    return  customColors[1]
-  }else{
-    return customColors[2]
-  }
-
+ return customColors[1]
 }
 
 /*
@@ -133,7 +122,7 @@ function generate(dataset, baskets){
     let bask = getBask(dataset[i][1])
     let many =  baskets.get(bask)[1]
     let count = baskets.get(bask)[0]
-    let rand = 10; //Math.floor((Math.random() * 90) + 0);
+    let rand = Math.floor((Math.random() * 90) + 0);
     let angle = 90 +rand
 
     let aux = rotate(posx, posy, t)
@@ -143,6 +132,7 @@ function generate(dataset, baskets){
     let ok = true;
     while(collide(elements, posx, posy)){
       times += 1
+    //  console.log("wtf")
       t = parseInt(t)%360
       t += angle
       if(times>=(360/angle)){
@@ -152,24 +142,23 @@ function generate(dataset, baskets){
       aux = rotate(posx,posy, t)
       posx = aux[0], posy = aux[1]
       if(angle < 1) {
+  //      console.log("super tired")
+      //  ok = false;
         break
       }
     }
     if(ok){
-      elements.push({"radius":radius, "x":posx, "y":posy, "name":dataset[i][0], "real":dataset[i][1]})
+      elements.push({"radius":radius, "x":posx, "y":posy, "name":dataset[i][0]})
       baskets.set(bask,[ count+1,  many+1])
     }
   }
   return elements
 }
 
-function sum(la, le ){
-  return la + le
-}
-
 /*
   Paint the circles
 */
+
 function paint(nameDiv){
 
   let ibody = d3.select("#chart")
@@ -186,15 +175,17 @@ function paint(nameDiv){
 
   var y_axis = d3.axisLeft()
     .scale(yscale)
-    .tickValues([200, 900, 1500])
+    .tickValues([500, 1000, 1500])
     .tickFormat(function (d) {
       if(d > 0 ) return d
     })
     .tickPadding(5)
+
+
   let bol = [
-      {id: "bigCircle",radio:1190},
-      {id: "middleCircle",radio:700},
-      {id: "innerCircle",radio:144}
+      {id: 991,radio:1150},
+      {id: 992,radio:700},
+      {id: 993,radio:144}
   ]
 
 
@@ -210,26 +201,16 @@ function paint(nameDiv){
     .attr("r", function (d) {
       return rscale(d.radio);
     })
-    .attr("id", function(d){
-      return d.id;
-    })
     .style("stroke", "black")
     .style("fill",function(d){
-      if(d.id == "bigCircle") return "#F2F2F2";
-      if(d.id  == "middleCircle") return "#D9D9D9";
-      if(d.id  == "innerCircle") return "#F2F2F2";
+      if(d.id == 993) return "#AAAAAA";
+      if(d.id  == 992) return "#D9D9D9";
+      if(d.id  == 991) return "#F2F2F2";
     });
 
-
   iradios.unshift(0)
   iradios.unshift(0)
   iradios.unshift(0)
-
-
-  let backgroundCircles = []
-        backgroundCircles.push( d3.select("#bigCircle"))
-        backgroundCircles.push( d3.select("#middleCircle"))
-        backgroundCircles.push( d3.select("#innerCircle"))
 
   isvg.selectAll("circle")
     .data(iradios)
@@ -238,115 +219,8 @@ function paint(nameDiv){
     .attr("cx", getX)
     .attr("cy", getY)
     .attr("r", getRadius)
-    .attr("opacity", 0) // ADV : All circles must be hidden at the start
-    .attr("id", function(d, i){
-      return "dot" + i
-    })
     .style("fill", getColor)
 
-
-
-  let dots = isvg.selectAll("circle")
-
-   //moving all the dots 
-   dots.transition()
-   .delay(0)
-   .duration(0)
-   .attr("transform", function(d, i){
-     if(  i >= 3 ){
-       if( elements[i-numBigCircles] != undefined   ){
-         let _str=""
-         let val = 20
-         let x = elements[i-numBigCircles]["x"]
-         let y = elements[i-numBigCircles]["y"]
-         let distance = elements[i-numBigCircles]["real"]
-         let the = Math.atan2(y, x) * 180 / Math.PI;
-         if(the < 0 ) the += 360
-         if(distance > 700){
-           if(the <=90){
-             _str =   "translate("+val+", -"+val+")" // up right
-           }else if( the <= 180){
-             _str =   "translate(-"+val+", -"+val+")" // up left
-           }else if( the <= 270){
-             _str =   "translate(-"+val+", +"+val+")" // down left
-           }else {
-             _str =   "translate("+val+", "+val+")" //down - right
-           }
-         }else {
-           if(the <=90){
-             _str =   "translate(-"+val+", +"+val+")" // down left
-           }else if( the <= 180){
-             _str =   "translate("+val+", "+val+")" //down - right
-           }else if( the <= 270){
-             _str =   "translate("+val+", -"+val+")" // up right
-           }else {
-             _str =   "translate(-"+val+", -"+val+")" // up left
-           }
-         }
-         return _str
-         }
-         
-       }
-   })
-   .attr("opacity", function(d,i){
-     if(i <= 2 ) return "1"
-     return "0"
-   })
-
-
-  dots.transition()
-    .delay(function(d, i){
-      if(i == home) return 200; 
-      if(i >= 3 ) {
-        let distance = elements[i-numBigCircles]["real"]
-        if(distance <= 700) return 700
-        return 1400
-      }
-    })
-    .duration(1000)
-    .attr("opacity", 1)
-
-  dots.transition()
-  .delay(2000)
-  .duration(1000)
-  .attr("transform", function(d, i){
-    if(  i >= 3 ){
-      if( elements[i-numBigCircles] != undefined   ){
-        let _str=""
-        let val = 0
-        let x = elements[i-numBigCircles]["x"]
-        let y = elements[i-numBigCircles]["y"]
-        let distance = elements[i-numBigCircles]["real"]
-        let the = Math.atan2(y, x) * 180 / Math.PI;
-        if(the < 0 ) the += 360
-        if(distance > 700){
-          if(the <=90){
-            _str =   "translate("+val+", -"+val+")" // up right
-          }else if( the <= 180){
-            _str =   "translate(-"+val+", -"+val+")" // up left
-          }else if( the <= 270){
-            _str =   "translate(-"+val+", +"+val+")" // down left
-          }else {
-            _str =   "translate("+val+", "+val+")" //down - right
-          }
-        }else {
-          if(the <=90){
-            _str =   "translate(-"+val+", +"+val+")" // down left
-          }else if( the <= 180){
-            _str =   "translate("+val+", "+val+")" //down - right
-          }else if( the <= 270){
-            _str =   "translate("+val+", -"+val+")" // up right
-          }else {
-            _str =   "translate(-"+val+", -"+val+")" // up left
-          }
-        }
-        return _str
-        }
-        
-      }
-  })
-  .attr("opacity", 1)
-    
   let arrows = [0,1,2,3,4,5,6,7]
   let arrowsy1 = [22, 22, 117, 117,230, 230, width/2, width/2]
   let iarrows = isvg.selectAll("line")
@@ -359,7 +233,7 @@ function paint(nameDiv){
       if(i%2==0)return "gray"
       return "gray"
     })
-    .style("stroke-width", "3")
+    .style("stroke-width", "1")
     .style("stroke", "black")  // colour the line
     .attr("x1", width/2)
     .attr("y1",  function(d,i){
@@ -397,7 +271,6 @@ function paint(nameDiv){
     .text("kWh / Month");
 
 
-    /* If you want legends uncomment this block
   let legend = isvg.selectAll('.legend')
     .data(labelsLegends)
     .enter()
@@ -423,9 +296,10 @@ function paint(nameDiv){
       .attr('y', legendRectSize - legendSpacing -8)
       .text(function (d) {
         return d.label;
-      }); */
+      });
 
 }
+
 
 class Radial {
   constructor(file){
@@ -454,7 +328,7 @@ class Radial {
             }
           }
         }
-        radius =  29 // Math.min(30, parseInt(26*30/dataset.length))
+        radius =  30 // Math.min(30, parseInt(26*30/dataset.length))
         elements = generate(dataset, basket)
         len =  elements.length
         iradios = arrayColumn(elements, "radius")
