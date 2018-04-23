@@ -104,8 +104,6 @@ function sortFunction(a,b){
 }
 
 
-
-
 /*
   Function to rotate a point(nx,ny) a grades
 */
