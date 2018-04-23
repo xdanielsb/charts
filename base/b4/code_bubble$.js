@@ -43,8 +43,8 @@ let labelsLegends = [{
 
 let elements = []
 let iradios = []
-let radius = 42
-let radiusb = 13
+let radius = 70
+let radiusb = 20
 let delta = 0
 
 let xscale = d3.scaleLinear()
@@ -232,8 +232,6 @@ function paint(nameDiv){
       
   
 }
-
-
 
 
 class Bubble {
