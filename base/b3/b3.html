@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="author" content="Daniel Santos">
   <script src="https://d3js.org/d3.v4.min.js"></script>
-  <script src="code_radial$.js"></script>
+  <script src="code_animated_radial$.js"></script>
   <script type="text/javascript" src="../../assets/js/jquery.min.js"></script>
   <script type="text/javascript" src="../../assets/js/jquery.csv.min.js"></script>
   <script type="text/javascript" src="../../assets/js/uploader.js"></script>
@@ -75,14 +75,17 @@
       {name:"House6",y:900},
       {name:"House7",y:1200},
       {name:"House8",y:900},
+      {name:"House8",y:900},
+      {name:"House8",y:900},
+      {name:"House8",y:900},
       {name:"House9",y:800},
       {name:"House10",y:1000},
       {name:"House11",y:700},
       {name:"House12",y:600}
     ]
     let bh = new Radial(data)
-    let myHouse = 7
-    bh.plot("chart", myHouse, false)
+    let codeHouse = "House10"
+    bh.plot("chart", codeHouse, false)
   </script>
 </body>
 </html>

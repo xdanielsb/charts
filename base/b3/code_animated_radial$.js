@@ -447,7 +447,13 @@ class Radial {
     // utilitary function
     document.getElementById(nameDiv).innerHTML = ""
     const arrayColumn = (arr, n) => arr.map(x => x[n])
-    home = myhome
+    // home = myhome
+    console.log(this.file)
+    for( let i = 0; i < this.file.length; i++){
+      if(this.file[i]["name"] == myhome){
+        home = i
+      }
+    }
     if (flag) {
       d3.csv(this.file, function (data) {
         let dataset = []
