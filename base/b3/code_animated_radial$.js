@@ -178,8 +178,10 @@ function pulsingEffect(num, from, until, delay=1000){
   
   let aux = 3000;
   
+  console.log(houses)
   for(let dur=from; dur<until; dur+=1){
-    for(let h in houses){
+    let cont = houses.length; 
+    for(let h=0; h< cont; h++){
       let name = "#dot"+houses[h]
       let dot =   d3.selectAll(name)
       if(dur & 0x01){
