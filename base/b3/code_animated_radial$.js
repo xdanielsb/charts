@@ -173,8 +173,10 @@ function pulsingEffect(num, from, until, delay=1000){
   let houses = [home]
   let len = elements.length
   let step = len / 5
-  for (let i = 0; i <= 4; ++i )
-    houses.push((home+step*i +1)%len)
+  for (let i = 0; i <= 4; ++i ){
+    let aux = parseInt((home+step*i +1))%len
+    houses.push()
+  }
   
   let aux = 3000;
   
