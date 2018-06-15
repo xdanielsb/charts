@@ -8,9 +8,9 @@
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="code_peak$.js"></script>
   <script type="text/javascript" src="../../assets/js/jquery.min.js"></script>
-  <script type="text/javascript" src="../../assets/js/jquery.csv.min.js"></script>
-  <script type="text/javascript" src="../../assets/js/uploader.js"></script>
-  <link rel="stylesheet" href="../../assets/css/table.css">
+  <!-- <script type="text/javascript" src="../../assets/js/jquery.csv.min.js"></script> -->
+  <!-- <script type="text/javascript" src="../../assets/js/uploader.js"></script> -->
+  <!-- <link rel="stylesheet" href="../../assets/css/table.css"> -->
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" />
   <title>Chart 1</title>
   <style media="screen">
@@ -22,6 +22,7 @@
     font-family: 'Open Sans',serif;
   }
   </style>
+  <link href="../../assets/css/prism.css" rel="stylesheet" />
 </head>
 <body>
   <br>
@@ -30,7 +31,6 @@
   </center>
   <div id="chart"></div>
 
-<br>
   <!--  In case that you need to upload real data
     <center> 
     <div >
@@ -61,6 +61,12 @@
   </center>
   -->
 
+<pre>
+
+<code class="language-css">p { color: red }</code>
+
+</pre>
+
   <script>
     /* way one*/
     let peak = new Peak("../data3.csv")
@@ -86,5 +92,7 @@
     let myHouse = 15
     peak.plot("chart", myHouse, false)*/
   </script>
+
+  <script src="../../assets/js/prism.js"></script>
 </body>
 </html>
