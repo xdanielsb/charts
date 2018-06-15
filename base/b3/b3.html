@@ -7,11 +7,11 @@
   <meta name="author" content="Daniel Santos">
   <script src="https://d3js.org/d3.v4.min.js"></script>
   <script src="code_animated_radial$.js"></script>
+  <link href="../../assets/css/prism_prod.css" rel="stylesheet" />
+  <script src="../../assets/js/prism_prod.js"></script>
+ 
   <script type="text/javascript" src="../../assets/js/jquery.min.js"></script>
-  <!-- <script type="text/javascript" src="../../assets/js/jquery.csv.min.js"></script> -->
-  <!-- <script type="text/javascript" src="../../assets/js/uploader.js"></script> -->
-  <!-- <link rel="stylesheet" href="../../assets/css/table.css"> -->
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" />
+ <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" />
   <title>Chart 3</title>
   <style media="screen">
   .tittle{
@@ -21,6 +21,10 @@
     font-size: : 12px;
     font-family: 'Open Sans',serif;
   }
+  h3 {
+    font-size: 30px;
+    font-style: italic;
+  }
   </style>
 </head>
 <body>
@@ -28,40 +32,63 @@
   <center>
     <h2 class="tittle">Last month's energy usage per household</h2>
   </center>
-  <div id="chart"></div>
+  <div style="margin-left: 135px;" id="chart"></div>
   <br>
-  
-    <!-- <center> 
-      <div >
-        <div id="left">
-          <br>
-          <h3>Upload the csv file that you want to visualize</h3>
-          <fieldset>
-            <legend> Choose the file </legend>
-            <form class="" action="index.html" method="post">
-              <input type="hidden" name="" value="3" id="cxd">
-              <input type="file" name="" value="" id="csv" onchange="selectFile()">
-              <br>
-              <div id="result1">
+   
+  <br>
 
-              </div>
-            </form>
-          </fieldset>
-        </div>
-        <div id="right">
-          <br>
-          <h3>Data</h3>
-          <fieldset>
-            <legend> Data that you upload</legend>
-            <table id="contents" > </table>
-          </fieldset>
-        </div>
-      </div>
-    </center>
-    -->
+<h3 style="margin-top: -390px;"> # index.html </h3>
+<pre data-line="9" class="line-numbers" style="white-space:pre-wrap;    width: 1000px;margin-left: 10%;">
+
+<code class="language-markup">
+  &lt;html> 
+    &lt;head> 
+      &lt;script src="https://d3js.org/d3.v4.min.js">&lt;/script>
+      &lt;script src="https://raw.githubusercontent.com/xdanielsb/Charts/master/base/b3/code_animated_radial%24.js">&lt;/script>
+    &lt;/head>
+    &lt;body> 
+    
+      &lt;div id="chart">&lt;/div>
+      &lt;script src="YourScript.js">&lt;/script>    
+    &lt;/body> 
+  &lt;/html>
+</code>
+</pre>
+<h3> # YourScript.js </h3>
+<pre style="white-space:pre-wrap;    width: 1000px;margin-left: 10%;">
+<code class="language-js line-numbers">
+    let data  = [
+      {name:"House1",y:600},
+      {name:"House2",y:750},
+      {name:"House3",y:800},
+      {name:"House4",y:900},
+      {name:"House5",y:1000},
+      {name:"House6",y:900},
+      {name:"House7",y:700},
+      {name:"House8",y:900},
+      {name:"House9",y:800},
+      {name:"House10",y:1000},
+      {name:"House11",y:700},
+      {name:"House12",y:600},
+      {name:"House13",y:900},
+      {name:"House14",y:800},
+      {name:"House15",y:1000},
+      {name:"House16",y:700},
+      {name:"House17",y:600}
+    ]
+    let ra = new Radial(data)
+    let myHouse = 4
+    let isDataFromCsv = false
+    ra.plot("chart", myHouse, isDataFromCsv)
+</code>
+</pre>
+
+<h3> # License </h3>
+
+Released under the  <a href "https://opensource.org/licenses/GPL-3.0">GNU General Public License, version 3.</a>
+
+
   <script>
-
-
     /* way one */
    /* let bh = new Radial("../data3.csv")
     let myHouse = 15
@@ -70,20 +97,22 @@
     /*Way two*/
     let data  = [
       {name:"House1",y:600},
-      {name:"House2",y:1300},
-      {name:"House3",y:200},
+      {name:"House2",y:750},
+      {name:"House3",y:800},
       {name:"House4",y:900},
       {name:"House5",y:1000},
       {name:"House6",y:900},
-      {name:"House7",y:1200},
-      {name:"House8",y:900},
-      {name:"House8",y:900},
-      {name:"House8",y:900},
+      {name:"House7",y:700},
       {name:"House8",y:900},
       {name:"House9",y:800},
       {name:"House10",y:1000},
       {name:"House11",y:700},
-      {name:"House12",y:600}
+      {name:"House12",y:600},
+      {name:"House13",y:900},
+      {name:"House14",y:800},
+      {name:"House15",y:1000},
+      {name:"House16",y:700},
+      {name:"House17",y:600}
     ]
     let bh = new Radial(data)
     let codeHouse = "House10"
